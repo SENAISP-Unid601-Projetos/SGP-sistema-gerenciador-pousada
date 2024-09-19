@@ -1,0 +1,92 @@
+/*Reset*/
+* {
+    padding: 0px; /* Remove o preenchimento padrão */
+    margin: 0px; /* Remove a margem padrão */
+    box-sizing: border-box; /* Inclui o padding e a borda na largura/altura total */
+    font-family: Arial, Helvetica, sans-serif; /* Define a fonte padrão */
+}
+
+/*imagem de fundo*/
+.hero {
+    height: 100vh; /* Altura total da tela */
+    width: 100%; /* Largura total */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../img/Fundo_Header.png); /* Imagem de fundo com gradiente */
+    background-color: rgba(0, 0, 0, 0.733); /* Cor de fundo de fallback */
+}
+
+/* Barra de navegação------------------------------------------------------- */
+nav {
+    display: flex; /* Usar flexbox para layout */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+    justify-content: space-between; /* Espaça os itens entre si */
+    padding-top: 40px; /* Espaçamento superior */
+    padding-left: 10%; /* Espaçamento à esquerda */
+    padding-right: 10%; /* Espaçamento à direita */
+}
+
+.home img {
+    width: 5%; /* Define a largura da imagem */
+}
+
+nav ul li {
+    list-style-type: none; /* Remove os marcadores da lista */
+    display: inline-block; /* Exibe os itens em linha */
+    padding: 10px 20px; /* Espaçamento interno */
+}
+
+nav ul li a {
+    color: white; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    font-weight: bold; /* Define o texto como negrito */
+}
+
+nav ul li a:hover {
+    color: #63AF7A; /* Cor do texto ao passar o mouse */
+    transition: .3s; /* Duração da transição */
+}
+
+/* hover nos botões------------------------------------------------------- */
+button:hover {
+    background-color: #63AF7A; /* Cor de fundo ao passar o mouse */
+    transition: .3s; /* Duração da transição */
+}
+
+/* Texto sobre a imagem na seção hero-------------------------------------------------------*/
+.hero-text {
+    position: absolute; /* Permite que o texto flutue sobre a imagem */
+    top: 50%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta a centralização vertical e horizontal */
+    text-align: center; /* Alinha o texto ao centro */
+    color: white; /* Define a cor do texto */
+}
+
+.hero-text h1 {
+    font-size: 36px; /* Tamanho da fonte do título */
+    margin: 0; /* Remove a margem */
+}
+
+.hero-text p {
+    font-size: 18px; /* Tamanho da fonte do parágrafo */
+    margin: 0; /* Remove a margem */
+}
+
+span {
+    color: #63AF7A; /* Cor personalizada para o texto */
+}
+
+/* Estilo para os botões-------------------------------------------------------*/
+button {
+    border: 1px solid white; /* Borda branca */
+    padding: 12px 30px; /* Preenchimento interno do botão */
+    border-radius: 30px; /* Cantos arredondados */
+    color: white; /* Cor do texto */
+    font-weight: bold; /* Texto em negrito */
+    font-size: 15px; /* Tamanho da fonte */
+    transition: .4s; /* Duração da transição para efeitos */
+    background-color: transparent; /* Fundo transparente */
+}
+
+.btn-text {
+    margin: 10px; /* Espaçamento em torno do texto do botão */
+}
