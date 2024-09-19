@@ -12,6 +12,7 @@
     width: 100%; /* Largura total */
     background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../img/Header.jpeg); /* Imagem de fundo com gradiente */
     background-color: rgba(0, 0, 0, 0.733); /* Cor de fundo de fallback */
+    background-size: cover; /* A imagem cobrirá toda a área do elemento */
 }
 
 /* Barra de navegação------------------------------------------------------- */
