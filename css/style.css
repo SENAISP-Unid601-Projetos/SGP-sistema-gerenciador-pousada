@@ -92,7 +92,6 @@ button {
     margin: 10px; /* Espaçamento em torno do texto do botão */
 }
 
-<<<<<<< HEAD
 /*Rodapé-----------------------------------------------------*/
 footer{
     background-color: black;
@@ -130,7 +129,8 @@ footer p {
 .icones-sociais a:hover {
     transform: scale(1.3) translateZ(-5);
     background-color: rgba(255, 255, 255, 0.212);
-=======
+}
+
 /* CSS ABA SOBRE--------------------------------------------------------------*/
 .sct-01 {
     padding: 40px 10%; /* Espaçamento superior e inferior, e lateral */
@@ -186,5 +186,4 @@ blockquote cite {
     display: block; /* Exibe o autor em uma nova linha */
     margin-top: 10px; /* Espaçamento acima do autor */
     font-weight: bold; /* Texto em negrito */
->>>>>>> 1c17f4daac7a2f7202a6bf29fd50ba54e153f32c
 }
