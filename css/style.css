@@ -65,23 +65,54 @@ button:hover {
 }
 
 /* Adicionando uma classe para o estado "movido para a direita" */
-.hero-text.mover {
-    left: 20px; /* Mover para a direita */
+.hero-text {
+    position: absolute; /* Permite que o texto flutue sobre a imagem */
+    top: 50%; /* Centraliza verticalmente */
+    left: 20px; /* Alinha um pouco à direita */
+    transform: translateY(-50%); /* Ajusta a centralização vertical */
+    text-align: left; /* Alinha o texto à esquerda */
+    color: white; /* Define a cor do texto */
+    padding-left: 20px; /* Adiciona um espaço à esquerda */
+    transition: left 0.5s ease; /* Transição suave para a propriedade left */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para legibilidade */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
 }
 
 .hero-text h1 {
-    font-size: 28px; /* Tamanho da fonte do título */
+    font-size: 32px; /* Tamanho do título */
     margin: 0; /* Remove a margem */
     font-weight: bold; /* Deixa o texto mais grosso */
+    line-height: 1.2; /* Aumenta a altura da linha para melhor legibilidade */
 }
 
 .hero-text p {
-    font-size: 16px; /* Tamanho da fonte do parágrafo */
-    margin: 0; /* Remove a margem */
-    font-weight: 500; /* Deixa o texto do parágrafo um pouco mais grosso */
+    font-size: 18px; /* Tamanho do parágrafo */
+    margin: 10px 0 0; /* Remove a margem superior e inferior */
+    font-weight: 400; /* Deixa o texto do parágrafo normal */
+    line-height: 1.6; /* Altura da linha para melhor legibilidade */
 }
+
 span {
-    color: #63AF7A;
+    color: #63AF7A; /* Cor personalizada para o texto */
+    font-weight: bold; /* Destaca o texto em span */
+}
+
+.btn-text {
+    margin-top: 15px; /* Espaço acima do botão */
+    padding: 10px 20px; /* Preenchimento do botão */
+    border: 1px solid white; /* Remove a borda padrão */
+    border-radius: 30px; /* Cantos arredondados */
+    background-color: transparent; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    font-weight: bold; /* Texto em negrito */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    transition: background-color .4s; /* Transição suave para a cor do fundo */
+}
+
+.btn-text:hover {
+    background-color: #4c9e6a; /* Cor ao passar o mouse */
 }
 
 
