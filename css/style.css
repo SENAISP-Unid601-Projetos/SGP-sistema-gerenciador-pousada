@@ -1,232 +1,188 @@
-/*Reset*/
+/* Reset */
 * {
-    padding: 0px; /* Remove o preenchimento padrão */
-    margin: 0px; /* Remove a margem padrão */
-    box-sizing: border-box; /* Inclui o padding e a borda na largura/altura total */
-    font-family: Arial, Helvetica, sans-serif; /* Define a fonte padrão */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Altera a fonte padrão */
 }
 
-/*imagem de fundo*/
+/* Estilo do cabeçalho */
 .hero {
-    height: 100vh; /* Altura total da tela */
-    width: 100%; /* Largura total */
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../img/Header.jpeg); /* Imagem de fundo com gradiente */
-    background-color: rgba(0, 0, 0, 0.733); /* Cor de fundo de fallback */
-    background-size: cover; /* A imagem cobrirá toda a área do elemento */
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/Header.jpeg);
+    background-size: cover;
 }
 
-/* Barra de navegação------------------------------------------------------- */
-nav {
-    display: flex; /* Usar flexbox para layout */
-    align-items: center; /* Alinha itens verticalmente ao centro */
-    justify-content: space-between; /* Espaça os itens entre si */
-    padding-top: 40px; /* Espaçamento superior */
-    padding-left: 10%; /* Espaçamento à esquerda */
-    padding-right: 10%; /* Espaçamento à direita */
+/* Navbar */
+.navbar {
+    padding: 20px 10%;
+    background: transparent; /* Torna o fundo da navbar transparente */
 }
 
-.home img {
-    width: 5%; /* Define a largura da imagem */
+.logo {
+    width: 100px; /* Ajuste a largura conforme necessário */
 }
 
-nav ul li {
-    list-style-type: none; /* Remove os marcadores da lista */
-    display: inline-block; /* Exibe os itens em linha */
-    padding: 10px 20px; /* Espaçamento interno */
-}
-
-nav ul li a {
-    color: white; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado */
-    font-weight: bold; /* Define o texto como negrito */
-}
-
-nav ul li a:hover {
-    color: #63AF7A; /* Cor do texto ao passar o mouse */
-    transition: .3s; /* Duração da transição */
-}
-
-/* hover nos botões------------------------------------------------------- */
-button:hover {
-    background-color: #63AF7A; /* Cor de fundo ao passar o mouse */
-    transition: .3s; /* Duração da transição */
-}
-
-/* Texto sobre a imagem na seção hero-------------------------------------------------------*/
+/* Texto na seção hero */
 .hero-text {
-    position: absolute; /* Permite que o texto flutue sobre a imagem */
-    top: 50%; /* Centraliza verticalmente */
-    left: 0; /* Inicialmente alinhado à esquerda */
-    transform: translateY(-50%); /* Ajusta a centralização vertical */
-    text-align: left; /* Alinha o texto à esquerda */
-    color: white; /* Define a cor do texto */
-    padding-left: 20px; /* Adiciona um espaço à esquerda */
-    transition: left 0.5s ease; /* Transição suave para a propriedade left */
-}
-
-/* Adicionando uma classe para o estado "movido para a direita" */
-.hero-text {
-    position: absolute; /* Permite que o texto flutue sobre a imagem */
-    top: 50%; /* Centraliza verticalmente */
-    left: 20px; /* Alinha um pouco à direita */
-    transform: translateY(-50%); /* Ajusta a centralização vertical */
-    text-align: left; /* Alinha o texto à esquerda */
-    color: white; /* Define a cor do texto */
-    padding-left: 20px; /* Adiciona um espaço à esquerda */
-    transition: left 0.5s ease; /* Transição suave para a propriedade left */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para legibilidade */
-    border-radius: 10px; /* Bordas arredondadas */
-    padding: 20px; /* Espaçamento interno */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para destaque */
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    color: white;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s ease-in-out; /* Suaviza a animação */
 }
 
 .hero-text h1 {
-    font-size: 32px; /* Tamanho do título */
-    margin: 0; /* Remove a margem */
-    font-weight: bold; /* Deixa o texto mais grosso */
-    line-height: 1.2; /* Aumenta a altura da linha para melhor legibilidade */
+    font-size: 32px;
+    font-weight: bold;
 }
 
 .hero-text p {
-    font-size: 18px; /* Tamanho do parágrafo */
-    margin: 10px 0 0; /* Remove a margem superior e inferior */
-    font-weight: 400; /* Deixa o texto do parágrafo normal */
-    line-height: 1.6; /* Altura da linha para melhor legibilidade */
+    font-size: 18px;
+    margin-top: 10px;
+    line-height: 1.6; /* Melhor legibilidade */
 }
 
-span {
-    color: #63AF7A; /* Cor personalizada para o texto */
-    font-weight: bold; /* Destaca o texto em span */
+.btn-primary {
+    background-color: #63AF7A;
+    border: none;
 }
 
-.btn-text {
-    margin-top: 15px; /* Espaço acima do botão */
-    padding: 10px 20px; /* Preenchimento do botão */
-    border: 1px solid white; /* Remove a borda padrão */
-    border-radius: 30px; /* Cantos arredondados */
-    background-color: transparent; /* Cor de fundo do botão */
-    color: white; /* Cor do texto do botão */
-    font-weight: bold; /* Texto em negrito */
-    cursor: pointer; /* Muda o cursor ao passar o mouse */
-    transition: background-color .4s; /* Transição suave para a cor do fundo */
+.btn-primary:hover {
+    background-color: #4c9e6a;
 }
 
-.btn-text:hover {
-    background-color: #4c9e6a; /* Cor ao passar o mouse */
-}
-
-
-/* Estilo para os botões-------------------------------------------------------*/
-button {
-    border: 1px solid white; /* Borda branca */
-    padding: 12px 30px; /* Preenchimento interno do botão */
-    border-radius: 30px; /* Cantos arredondados */
-    color: white; /* Cor do texto */
-    font-weight: bold; /* Texto em negrito */
-    font-size: 15px; /* Tamanho da fonte */
-    transition: .4s; /* Duração da transição para efeitos */
-    background-color: transparent; /* Fundo transparente */
-}
-
-.btn-text {
-    margin: 10px; /* Espaçamento em torno do texto do botão */
-}
-
-/*Rodapé-----------------------------------------------------*/
-footer{
-    background-color: black;
-    color: white;
-    height: 25vh;
-}
-
-footer p {
-    text-align: center;
-    padding: 20px;
-}
-
-.icones-sociais {
-    display: flex; /* Utiliza flexbox */
-    justify-content: center; /* Centraliza horizontalmente */
-    margin-top: 10px; /* Espaçamento acima dos ícones */
-}
-
-/*Icones sociais Rodapé*/
-.icones-sociais a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 2rem;
-    height: 2rem;
-    background-color: transparent;
-    font-size: 2rem;
-    border-radius: 50%;
-    margin: 1rem 0.5rem 3rem;
-    transition: 0.3s ease;
-    color: rgb(0, 128, 55);
-    text-decoration: none;
-}
-
-.icones-sociais a:hover {
-    transform: scale(1.3) translateZ(-5);
-    background-color: rgba(255, 255, 255, 0.212);
-}
-
-/* CSS ABA SOBRE--------------------------------------------------------------*/
+/* Seção Sobre */
 .sct-01 {
-    padding: 40px 10%; /* Espaçamento superior e inferior, e lateral */
+    padding: 40px 10%;
     background-color: #e7e1d3; /* Cor de fundo suave */
+    border-radius: 10px; /* Bordas arredondadas */
 }
 
 .sobre-container {
-    display: flex; /* Usar flexbox */
-    align-items: center; /* Alinha itens verticalmente ao centro */
+    display: flex;
+    align-items: center; /* Alinha itens ao centro */
+    flex-wrap: wrap; /* Permite que os itens se ajustem */
 }
 
 .sobre-texto {
-    flex: 1; /* Ocupa o espaço disponível */
-    text-align: left; /* Alinha o texto à esquerda */
+    flex: 1;
+    text-align: left; /* Centraliza o texto */
+    margin-right: 20px; /* Espaço à direita do texto */
 }
 
-.sobre-imagem {
-    flex: 1; /* Ocupa o espaço disponível */
-    text-align: right; /* Alinha a imagem à direita */
+.sobre-texto h1 {
+    font-size: 36px; /* Aumenta o tamanho do título */
+    font-weight: 700; /* Deixa o título mais grosso */
+    margin-bottom: 20px; /* Espaço abaixo do título */
 }
 
-.sct-01 h1 {
-    font-size: 2.5rem; /* Tamanho do título */
-    margin-bottom: 20px; /* Espaçamento abaixo do título */
-    color: #63AF7A; /* Cor verde */
-    font-weight: 600; /* Deixa o texto mais grosso (negrito) */
+.sobre-texto p {
+    font-size: 18px; /* Aumenta o tamanho do parágrafo */
+    line-height: 1.6; /* Melhora a legibilidade */
+    font-family: 'Georgia', serif; /* Define uma fonte mais elegante */
 }
 
-
-.sct-01 p {
-    font-size: 1.2rem; /* Tamanho do parágrafo */
-    margin-bottom: 20px; /* Espaçamento abaixo do parágrafo */
-    line-height: 1.5; /* Altura da linha para melhor legibilidade */
+.sobre-imagens {
+    display: flex; /* Torna as imagens flexíveis */
+    justify-content: center; /* Centraliza as imagens horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    flex: 1; /* Para ocupar o espaço restante */
 }
 
-.sobre-imagem img {
-    width: 100%; /* Faz a imagem ocupar toda a largura do seu contêiner */
-    max-width: 500px; /* Limita a largura máxima da imagem */
+.sobre-imagens img {
+    max-width: 100%; /* Limita a largura das imagens */
     height: auto; /* Mantém a proporção da imagem */
-    border-radius: 15px; /* Bordas arredondadas */
+    margin: 5px; /* Adiciona margem entre as imagens */
+    width: 250px; /* Define uma largura fixa para as imagens */
+    border-radius: 15px; /* Bordas redondas */
+    transition: transform 0.3s ease; /* Suaviza a transformação */
 }
 
-
-blockquote {
-    font-style: italic; /* Estilo em itálico */
-    margin: 20px 0; /* Espaçamento vertical */
-    padding: 10px; /* Preenchimento interno */
-    border-left: 4px solid #63AF7A; /* Borda à esquerda */
+.sobre-imagens img:hover {
+    transform: scale(1.05); /* Aumenta a imagem ao passar o mouse */
 }
 
-blockquote p {
-    margin: 0; /* Remove margens do parágrafo dentro do bloco */
+/* Estilo para as imagens */
+.sobre-imagens {
+    flex: 1;
+    position: relative; /* Para posicionar as imagens em cima uma da outra */
+    overflow: hidden; /* Esconde o excesso de imagem */
 }
 
-blockquote cite {
-    display: block; /* Exibe o autor em uma nova linha */
-    margin-top: 10px; /* Espaçamento acima do autor */
-    font-weight: bold; /* Texto em negrito */
+.imagem-wrapper {
+    position: absolute; /* Permite sobreposição */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.5s ease-in-out; /* Suaviza a transição */
+}
+
+.imagem-wrapper.active {
+    opacity: 1; /* Torna a imagem ativa visível */
+}
+
+.sobre-imagens img {
+    width: 100%; /* Faz a imagem ocupar toda a largura do seu contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+/* Rodapé */
+footer {
+    background-color: black;
+    color: white; /* Garante que o texto seja branco */
+    text-align: center;
+    padding: 20px 0; /* Espaçamento no rodapé */
+}
+
+.icones-sociais a {
+    color: #63AF7A;
+    margin: 0 10px;
+}
+
+.icones-sociais a:hover {
+    color: #4c9e6a;
+}
+
+/* Cards */
+.sct-02 {
+    padding: 40px 10%;
+    background-color: #f8f9fa; /* Cor de fundo suave */
+    text-align: center; /* Centraliza o texto */
+}
+
+.acomodacoes-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards se ajustem em várias linhas */
+    justify-content: space-around; /* Espaçamento uniforme entre os cards */
+}
+
+.card {
+    width: 300px; /* Largura fixa para os cards */
+    margin: 20px; /* Margem para separação entre os cards */
+    border: 1px solid #ccc; /* Borda leve para os cards */
+    border-radius: 10px; /* Bordas arredondadas */
+    overflow: hidden; /* Oculta excesso de conteúdo */
+    transition: transform 0.3s; /* Efeito de transformação suave ao passar o mouse */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
+}
+
+.card-img-top {
+    height: 200px; /* Altura fixa para as imagens */
+    object-fit: cover; /* Cobre o espaço do card */
+}
+
+/* Classe de cor personalizada */
+.text-green {
+    color: #63AF7A; /* Cor verde */
 }
