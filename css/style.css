@@ -10,7 +10,7 @@
 .hero {
     height: 100vh; /* Altura total da tela */
     width: 100%; /* Largura total */
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../img/Fundo_Header.png); /* Imagem de fundo com gradiente */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../img/Header.jpeg); /* Imagem de fundo com gradiente */
     background-color: rgba(0, 0, 0, 0.733); /* Cor de fundo de fallback */
 }
 
