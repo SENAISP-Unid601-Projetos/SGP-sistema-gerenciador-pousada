@@ -56,25 +56,34 @@ button:hover {
 .hero-text {
     position: absolute; /* Permite que o texto flutue sobre a imagem */
     top: 50%; /* Centraliza verticalmente */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translate(-50%, -50%); /* Ajusta a centralização vertical e horizontal */
-    text-align: center; /* Alinha o texto ao centro */
+    left: 0; /* Inicialmente alinhado à esquerda */
+    transform: translateY(-50%); /* Ajusta a centralização vertical */
+    text-align: left; /* Alinha o texto à esquerda */
     color: white; /* Define a cor do texto */
+    padding-left: 20px; /* Adiciona um espaço à esquerda */
+    transition: left 0.5s ease; /* Transição suave para a propriedade left */
+}
+
+/* Adicionando uma classe para o estado "movido para a direita" */
+.hero-text.mover {
+    left: 20px; /* Mover para a direita */
 }
 
 .hero-text h1 {
-    font-size: 36px; /* Tamanho da fonte do título */
+    font-size: 28px; /* Tamanho da fonte do título */
     margin: 0; /* Remove a margem */
+    font-weight: bold; /* Deixa o texto mais grosso */
 }
 
 .hero-text p {
-    font-size: 18px; /* Tamanho da fonte do parágrafo */
+    font-size: 16px; /* Tamanho da fonte do parágrafo */
     margin: 0; /* Remove a margem */
+    font-weight: 500; /* Deixa o texto do parágrafo um pouco mais grosso */
+}
+span {
+    color: #63AF7A;
 }
 
-span {
-    color: #63AF7A; /* Cor personalizada para o texto */
-}
 
 /* Estilo para os botões-------------------------------------------------------*/
 button {
@@ -116,7 +125,10 @@ button {
 .sct-01 h1 {
     font-size: 2.5rem; /* Tamanho do título */
     margin-bottom: 20px; /* Espaçamento abaixo do título */
+    color: #63AF7A; /* Cor verde */
+    font-weight: 600; /* Deixa o texto mais grosso (negrito) */
 }
+
 
 .sct-01 p {
     font-size: 1.2rem; /* Tamanho do parágrafo */
