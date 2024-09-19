@@ -128,7 +128,9 @@ button {
     width: 100%; /* Faz a imagem ocupar toda a largura do seu contêiner */
     max-width: 500px; /* Limita a largura máxima da imagem */
     height: auto; /* Mantém a proporção da imagem */
+    border-radius: 15px; /* Bordas arredondadas */
 }
+
 
 blockquote {
     font-style: italic; /* Estilo em itálico */
