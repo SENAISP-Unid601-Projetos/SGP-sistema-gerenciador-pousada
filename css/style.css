@@ -91,3 +91,58 @@ button {
 .btn-text {
     margin: 10px; /* Espaçamento em torno do texto do botão */
 }
+
+/* CSS ABA SOBRE--------------------------------------------------------------*/
+.sct-01 {
+    padding: 40px 10%; /* Espaçamento superior e inferior, e lateral */
+    background-color: #e7e1d3; /* Cor de fundo suave */
+}
+
+.sobre-container {
+    display: flex; /* Usar flexbox */
+    align-items: center; /* Alinha itens verticalmente ao centro */
+}
+
+.sobre-texto {
+    flex: 1; /* Ocupa o espaço disponível */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.sobre-imagem {
+    flex: 1; /* Ocupa o espaço disponível */
+    text-align: right; /* Alinha a imagem à direita */
+}
+
+.sct-01 h1 {
+    font-size: 2.5rem; /* Tamanho do título */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+.sct-01 p {
+    font-size: 1.2rem; /* Tamanho do parágrafo */
+    margin-bottom: 20px; /* Espaçamento abaixo do parágrafo */
+    line-height: 1.5; /* Altura da linha para melhor legibilidade */
+}
+
+.sobre-imagem img {
+    width: 100%; /* Faz a imagem ocupar toda a largura do seu contêiner */
+    max-width: 500px; /* Limita a largura máxima da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+}
+
+blockquote {
+    font-style: italic; /* Estilo em itálico */
+    margin: 20px 0; /* Espaçamento vertical */
+    padding: 10px; /* Preenchimento interno */
+    border-left: 4px solid #63AF7A; /* Borda à esquerda */
+}
+
+blockquote p {
+    margin: 0; /* Remove margens do parágrafo dentro do bloco */
+}
+
+blockquote cite {
+    display: block; /* Exibe o autor em uma nova linha */
+    margin-top: 10px; /* Espaçamento acima do autor */
+    font-weight: bold; /* Texto em negrito */
+}
