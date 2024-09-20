@@ -1,7 +1,7 @@
-# Pousada Online 🌴
+# SGP - SISTEMA DE GESTÃO DE POUSADA 🌴
 
 ## Descrição do Projeto
-O **Pousada Online** é um projeto desenvolvido em HTML, CSS e JavaScript para o frontend, e Python com Flask para o backend. O sistema visa facilitar o cadastro e a reserva de quartos em uma pousada, proporcionando uma experiência amigável e eficiente para os usuários.
+O **SGP - SISTEMA DE GESTÃO DE POUSADA** é um projeto desenvolvido em HTML, CSS e JavaScript para o frontend, e Python com Flask para o backend. O sistema visa facilitar o cadastro e a reserva de quartos em uma pousada, proporcionando uma experiência amigável e eficiente para os usuários.
 
 ## Funcionalidades
 - 🏨 **Cadastro de Usuários:** Registre novos usuários com suas informações pessoais.
