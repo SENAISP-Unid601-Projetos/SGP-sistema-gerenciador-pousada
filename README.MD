@@ -1,6 +1,26 @@
+# Pousada Online 🌴
+
+## Descrição do Projeto
+O **Pousada Online** é um projeto desenvolvido em HTML, CSS e JavaScript para o frontend, e Python com Flask para o backend. O sistema visa facilitar o cadastro e a reserva de quartos em uma pousada, proporcionando uma experiência amigável e eficiente para os usuários.
+
+## Funcionalidades
+- 🏨 **Cadastro de Usuários:** Registre novos usuários com suas informações pessoais.
+- 📅 **Reserva de Quartos:** Selecione e reserve quartos disponíveis.
+- 📊 **Visualização de Disponibilidade:** Interface para visualizar quartos disponíveis em diferentes datas.
+
+## Tecnologias Utilizadas
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python, Flask
+- **IDE:** Visual Studio
+
+## Como Executar o Projeto 🚀
+Clone o Repositório:
+```bash
+git clone https://github.com/seu-usuario/pousada-online.git
+
 # Links Importantes
 
 Aqui estão alguns links importantes para o projeto:
 
 - [Design da Pousada PINC no Figma](https://www.figma.com/design/GlZQbM6AardIXupL15uPoG/Pousada_PINC?node-id=1-2&t=RyWhzfUOVdN9HwEi-1)
-- [Notion - Página do Projeto](https://www.notion.so/816872dc6067450ab25e4d5c75749685?v=de68f9d8ee734d86b9c5a03c824d671e&pvs=4)
+- [Visualisação do Projeto](https://caiodalnegro.github.io/ProjetoPousada/)
