@@ -18,7 +18,7 @@ O **Pousada Online** é um projeto desenvolvido em HTML, CSS e JavaScript para o
 Aqui estão alguns links importantes para o projeto:
 
 - [Design da Pousada PINC no Figma](https://www.figma.com/design/GlZQbM6AardIXupL15uPoG/Pousada_PINC?node-id=1-2&t=RyWhzfUOVdN9HwEi-1)
-- [Visualisação do Projeto](https://caiodalnegro.github.io/ProjetoPousada/)
+- [Visualização do Projeto](https://caiodalnegro.github.io/ProjetoPousada/)
 
 ## Como Executar o Projeto 🚀
 Clone o Repositório:
