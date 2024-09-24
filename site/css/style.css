@@ -20,7 +20,7 @@
 }
 
 .logo {
-    width: 100px; /* Ajuste a largura conforme necessário */
+    width: 50%; /* Ajuste a largura conforme necessário */
 }
 
 /* Texto na seção hero */
@@ -31,10 +31,6 @@
     transform: translateY(-50%);
     color: white;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.5s ease-in-out; /* Suaviza a animação */
 }
 
 .hero-text h1 {
