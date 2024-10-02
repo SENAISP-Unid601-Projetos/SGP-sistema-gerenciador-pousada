@@ -1,3 +1,3 @@
 # Projeto Pousada
 
-Você pode acessar o site do Projeto Pousada [aqui](https://caiodalnegro.github.io/ProjetoPousada/).
+Acesse a página específica do projeto [aqui](https://caiodalnegro.github.io/ProjetoPousada/site/).
