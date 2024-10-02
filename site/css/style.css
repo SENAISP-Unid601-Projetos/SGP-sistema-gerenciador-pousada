@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif; /* Altera a fonte padrão */
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Estilo do cabeçalho */
@@ -16,11 +16,11 @@
 /* Navbar */
 .navbar {
     padding: 20px 10%;
-    background: transparent; /* Torna o fundo da navbar transparente */
+    background: transparent;
 }
 
 .logo {
-    width: 50%; /* Ajuste a largura conforme necessário */
+    width: 50%;
 }
 
 /* Texto na seção hero */
@@ -41,7 +41,7 @@
 .hero-text p {
     font-size: 18px;
     margin-top: 10px;
-    line-height: 1.6; /* Melhor legibilidade */
+    line-height: 1.6;
 }
 
 .btn-primary {
@@ -56,86 +56,60 @@
 /* Seção Sobre */
 .sct-01 {
     padding: 40px 10%;
-    background-color: #e7e1d3; /* Cor de fundo suave */
-    border-radius: 10px; /* Bordas arredondadas */
+    background-color: #e7e1d3;
+    border-radius: 10px;
 }
 
 .sobre-container {
     display: flex;
-    align-items: center; /* Alinha itens ao centro */
-    flex-wrap: wrap; /* Permite que os itens se ajustem */
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .sobre-texto {
     flex: 1;
-    text-align: left; /* Centraliza o texto */
-    margin-right: 20px; /* Espaço à direita do texto */
+    text-align: left;
+    margin-right: 20px;
 }
 
 .sobre-texto h1 {
-    font-size: 36px; /* Aumenta o tamanho do título */
-    font-weight: 700; /* Deixa o título mais grosso */
-    margin-bottom: 20px; /* Espaço abaixo do título */
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .sobre-texto p {
-    font-size: 18px; /* Aumenta o tamanho do parágrafo */
-    line-height: 1.6; /* Melhora a legibilidade */
-    font-family: 'Georgia', serif; /* Define uma fonte mais elegante */
+    font-size: 18px;
+    line-height: 1.6;
+    font-family: 'Georgia', serif;
 }
 
 .sobre-imagens {
-    display: flex; /* Torna as imagens flexíveis */
-    justify-content: center; /* Centraliza as imagens horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    flex: 1; /* Para ocupar o espaço restante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .sobre-imagens img {
-    max-width: 100%; /* Limita a largura das imagens */
-    height: auto; /* Mantém a proporção da imagem */
-    margin: 5px; /* Adiciona margem entre as imagens */
-    width: 250px; /* Define uma largura fixa para as imagens */
-    border-radius: 15px; /* Bordas redondas */
-    transition: transform 0.3s ease; /* Suaviza a transformação */
+    max-width: 100%;
+    height: auto;
+    margin: 5px;
+    width: 250px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
 }
 
 .sobre-imagens img:hover {
-    transform: scale(1.05); /* Aumenta a imagem ao passar o mouse */
-}
-
-/* Estilo para as imagens */
-.sobre-imagens {
-    flex: 1;
-    position: relative; /* Para posicionar as imagens em cima uma da outra */
-    overflow: hidden; /* Esconde o excesso de imagem */
-}
-
-.imagem-wrapper {
-    position: absolute; /* Permite sobreposição */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0; /* Começa invisível */
-    transition: opacity 0.5s ease-in-out; /* Suaviza a transição */
-}
-
-.imagem-wrapper.active {
-    opacity: 1; /* Torna a imagem ativa visível */
-}
-
-.sobre-imagens img {
-    width: 100%; /* Faz a imagem ocupar toda a largura do seu contêiner */
-    height: auto; /* Mantém a proporção da imagem */
+    transform: scale(1.05);
 }
 
 /* Rodapé */
 footer {
     background-color: black;
-    color: white; /* Garante que o texto seja branco */
+    color: white;
     text-align: center;
-    padding: 20px 0; /* Espaçamento no rodapé */
+    padding: 20px 0;
 }
 
 .icones-sociais a {
@@ -150,35 +124,79 @@ footer {
 /* Cards */
 .sct-02 {
     padding: 40px 10%;
-    background-color: #f8f9fa; /* Cor de fundo suave */
-    text-align: center; /* Centraliza o texto */
+    background-color: #f8f9fa;
+    text-align: center;
 }
 
 .acomodacoes-container {
     display: flex;
-    flex-wrap: wrap; /* Permite que os cards se ajustem em várias linhas */
-    justify-content: space-around; /* Espaçamento uniforme entre os cards */
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .card {
-    width: 300px; /* Largura fixa para os cards */
-    margin: 20px; /* Margem para separação entre os cards */
-    border: 1px solid #ccc; /* Borda leve para os cards */
-    border-radius: 10px; /* Bordas arredondadas */
-    overflow: hidden; /* Oculta excesso de conteúdo */
-    transition: transform 0.3s; /* Efeito de transformação suave ao passar o mouse */
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
 }
 
 .card:hover {
-    transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
+    transform: scale(1.05);
 }
 
 .card-img-top {
-    height: 200px; /* Altura fixa para as imagens */
-    object-fit: cover; /* Cobre o espaço do card */
+    height: 200px;
+    object-fit: cover;
 }
 
 /* Classe de cor personalizada */
 .text-green {
-    color: #63AF7A; /* Cor verde */
+    color: #63AF7A;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .hero-text {
+        left: 20px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 24px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .sobre-container {
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .sobre-texto {
+        margin-right: 0; /* Remove margem à direita */
+        margin-bottom: 20px; /* Adiciona margem embaixo */
+    }
+
+    .sobre-imagens {
+        justify-content: center; /* Centraliza as imagens */
+    }
+
+    .sobre-imagens img {
+        width: 100%; /* Faz a imagem ocupar toda a largura do contêiner */
+    }
+
+    .acomodacoes-container {
+        flex-direction: column; /* Empilha os cards verticalmente em telas pequenas */
+        align-items: center; /* Centraliza os cards */
+    }
+
+    .card {
+        width: 90%; /* Largura responsiva para os cards */
+    }
 }
