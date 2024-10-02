@@ -1,0 +1,117 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #6c5317;
+    margin: 0;
+    font-size: 0.9rem; /* Tamanho da fonte geral */
+}
+
+.hero {
+    background-image: url('../img/hero-bg.jpg');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    padding: 1px 0; /* Padding da seção hero reduzido */
+    position: relative; /* Necessário para o ::after */
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero-text {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100%; /* Para centralização vertical */
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text h1 {
+    font-size: 2rem; /* Tamanho do título */
+    margin: 0;
+}
+
+.sct-02 {
+    padding: 30px 20px; /* Padding da seção */
+    background-color: #fff;
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem; /* Tamanho do título da seção */
+    margin-bottom: 20px; /* Margem inferior */
+}
+
+.acomodacoes-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    gap: 15px; /* Espaçamento entre os cards */
+    justify-items: center; /* Centraliza os cards */
+    margin-top: 15px; /* Espaço acima da grid */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* Largura máxima dos cartões */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: scale(1.03); /* Escala ao passar o mouse */
+}
+
+.card img {
+    width: 100%; /* Imagem ocupa toda a largura do card */
+    height: auto; /* Mantém a proporção */
+}
+
+.card-body {
+    padding: 10px; /* Padding do corpo do card */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f9f9f9; /* Cor de fundo do card */
+}
+
+footer {
+    margin-top: 30px; /* Margem superior do footer */
+    background-color: #343a40;
+    color: white;
+    padding: 15px 0; /* Padding do footer */
+}
+
+.icones-sociais a {
+    margin: 0 8px; /* Margem entre os ícones */
+    color: white;
+    text-decoration: none;
+}
+
+.btn-reserva {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; /* Tamanho do botão */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px; /* Margem acima do botão */
+    width: 100%; /* Botão ocupa toda a largura do card */
+}
+
+.btn-reserva:hover {
+    background-color: #218838; /* Cor do botão ao passar o mouse */
+}
