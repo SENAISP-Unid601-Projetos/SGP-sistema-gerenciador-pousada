@@ -9,7 +9,7 @@
 /* Estilo do cabeçalho */
 .hero {
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../img/Header.jpeg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/static/img/Header.jpeg);
     background-size: cover;
 }
 

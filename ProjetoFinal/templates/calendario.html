@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário de Check-ins</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Calendário de Check-ins</h1>
+
+    <!-- Formulário para adicionar uma nova reserva -->
+    <form action="{{ url_for('add_checkin') }}" method="POST">
+        <input type="text" name="nome" placeholder="Nome do Hóspede" required>
+        <input type="date" name="checkin" required>
+        <input type="date" name="checkout" required>
+        <button type="submit">Adicionar Check-in</button>
+    </form>
+
+    <!-- Lista de reservas -->
+    <h2>Reservas Atuais</h2>
+    <ul>
+        {% for reserva in reservas %}
+            <li>{{ reserva.nome }} - Check-in: {{ reserva.checkin }} - Check-out: {{ reserva.checkout }}
+                <a href="{{ url_for('delete_reserva', id=reserva.doc_id) }}">Deletar</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

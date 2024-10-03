@@ -6,7 +6,7 @@ body {
 }
 
 .hero {
-    background-image: url('../img/hero-bg.jpg');
+    background-image: url('/static/img/hero-bg.jpg');
     background-size: cover;
     color: white;
     text-align: center;
