@@ -24,9 +24,9 @@
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item"><a class="nav-link" href="#sobre">SOBRE</a></li>
                             <li class="nav-item"><a class="nav-link" href="#acomodacao">ACOMODAÇÕES</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/templates/reserva.html">RESERVE</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ url_for('reserva') }}">RESERVE</a></li>
                         </ul>
-                        <a href="/templates/login.html">
+                        <a href="{{ url_for('login') }}">
                             <button type="button" class="btn btn-outline-light ms-3">LOGIN</button>
                         </a>
                     </div>
@@ -35,7 +35,9 @@
             <div class="hero-text">
                 <h1>Reconecte-se com a <span class="text-green">Natureza</span></h1>
                 <p>Descubra o <span class="text-green">refúgio</span> perfeito na Quinta do Ypuã, onde o <span class="text-green">conforto</span> e a<br><span class="text-green">natureza</span> se encontram para criar momentos inesquecíveis.</p>
-                <button type="button" class="btn btn-primary">RESERVE JÁ</button>
+                <a href="{{ url_for('reserva') }}">
+                    <button type="button" class="btn btn-primary">RESERVE JÁ</button>
+                </a>
             </div>
         </div>
     </header>
@@ -90,7 +92,7 @@
     </section>
 
     <footer class="bg-dark text-white text-center py-4">
-        <p>&copy; 2024 Quinta do Ypuã. Todos os direitos reservados.</p>
+        <p>&copy; 2024 Quinta do Ypuã - Todos os direitos reservados.</p>
         <div class="icones-sociais">
             <a href="https://www.facebook.com/pousadaquintadoypua/?locale=pt_BR"><i class="fa fa-facebook"></i></a>
             <a href="https://www.instagram.com/pousadaquintadoypua/"><i class="fa fa-instagram"></i></a>
