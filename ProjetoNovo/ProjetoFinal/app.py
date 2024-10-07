@@ -11,13 +11,17 @@ db = TinyDB('database.json')
 def index():
     return render_template('index.html')
 
-@app.route('/login')
+@app.route('/lugares/login')
 def login():
     return render_template('login.html')
 
 @app.route('/reserva')
 def reserva():
     return render_template('reserva.html')
+
+@app.route('/domo')
+def domo():
+    return render_template('domo.html')
 
 # Inicia o servidor
 if __name__ == '__main__':

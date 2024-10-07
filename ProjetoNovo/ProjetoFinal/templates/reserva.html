@@ -66,17 +66,17 @@
         </div>
     </section>
     <section class="p-5 bg-light">
-        <div class="container text-center">
-            <h2 class="mb-5">Sobre a Pousada</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <i class="fas fa-leaf fa-3x" style="color: #228B22;"></i>
-                    <h4 class="mt-3">Natureza</h4>
-                    <p>Experimente a beleza da natureza ao redor da pousada.</p>
-                </div>
-                <div class="col-md-4">
-                    <i class="fas fa-concierge-bell fa-3x" style="color: #FFD700;"></i>
-                    <h4 class="mt-3">Serviço de Qualidade</h4>
+            <div class="container text-center">
+                <h2 class="mb-5">Sobre a Pousada</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <i class="fas fa-leaf fa-3x" style="color: #228B22;"></i>
+                        <h4 class="mt-3">Natureza</h4>
+                        <p>Experimente a beleza da natureza ao redor da pousada.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <i class="fas fa-concierge-bell fa-3x" style="color: #FFD700;"></i>
+                        <h4 class="mt-3">Serviço de Qualidade</h4>
                     <p>Nosso staff está sempre à disposição para te atender.</p>
                 </div>
                 <div class="col-md-4">
@@ -122,7 +122,9 @@
                                     <i class="fas fa-bath" style="color: #FF69B4;"></i>
                                 </p>
                                 <p class="price">R$ 590,00 / noite</p>
-                                <a href="domo.html" class="btn btn-primary">Ver Mais</a>
+                                <a href="{{ url_for('domo') }}">
+                                    <button type="button" class="btn btn-primary">Ver Mais</button>
+                                </a>
                             </div>
                         </div>
                     </div>
