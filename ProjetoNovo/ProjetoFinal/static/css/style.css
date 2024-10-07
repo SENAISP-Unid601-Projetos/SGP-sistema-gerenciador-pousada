@@ -1,0 +1,202 @@
+/* Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Estilo do cabeçalho */
+.hero {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/static/img/Header.jpeg);
+    background-size: cover;
+}
+
+/* Navbar */
+.navbar {
+    padding: 20px 10%;
+    background: transparent;
+}
+
+.logo {
+    width: 50%;
+}
+
+/* Texto na seção hero */
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    color: white;
+    padding: 20px;
+}
+
+.hero-text h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.hero-text p {
+    font-size: 18px;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    background-color: #63AF7A;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #4c9e6a;
+}
+
+/* Seção Sobre */
+.sct-01 {
+    padding: 40px 10%;
+    background-color: #e7e1d3;
+    border-radius: 10px;
+}
+
+.sobre-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sobre-texto {
+    flex: 1;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.sobre-texto h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.sobre-texto p {
+    font-size: 18px;
+    line-height: 1.6;
+    font-family: 'Georgia', serif;
+}
+
+.sobre-imagens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.sobre-imagens img {
+    max-width: 100%;
+    height: auto;
+    margin: 5px;
+    width: 250px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.sobre-imagens img:hover {
+    transform: scale(1.05);
+}
+
+/* Rodapé */
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.icones-sociais a {
+    color: #63AF7A;
+    margin: 0 10px;
+}
+
+.icones-sociais a:hover {
+    color: #4c9e6a;
+}
+
+/* Cards */
+.sct-02 {
+    padding: 40px 10%;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.acomodacoes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: 300px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Classe de cor personalizada */
+.text-green {
+    color: #63AF7A;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .hero-text {
+        left: 20px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 24px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .sobre-container {
+        flex-direction: column; /* Empilha os elementos verticalmente */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .sobre-texto {
+        margin-right: 0; /* Remove margem à direita */
+        margin-bottom: 20px; /* Adiciona margem embaixo */
+    }
+
+    .sobre-imagens {
+        justify-content: center; /* Centraliza as imagens */
+    }
+
+    .sobre-imagens img {
+        width: 100%; /* Faz a imagem ocupar toda a largura do contêiner */
+    }
+
+    .acomodacoes-container {
+        flex-direction: column; /* Empilha os cards verticalmente em telas pequenas */
+        align-items: center; /* Centraliza os cards */
+    }
+
+    .card {
+        width: 90%; /* Largura responsiva para os cards */
+    }
+}
