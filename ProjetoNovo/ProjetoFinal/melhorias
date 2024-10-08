@@ -3,3 +3,7 @@ melhorar o aspecto do login
 fazer funcionar o login
 mudar a tonalidade do fundo para algo mais escuro
 fazer funcionar o contato
+fazer com que as datas nao se conflitam com dados ja existentes
+fazer com que nao exista o mesmo email cadastrado
+fazer com que todos os dados de reserva sejam armazenados no mesmo banco
+fazer com que no formulario seja colocado a data correta
