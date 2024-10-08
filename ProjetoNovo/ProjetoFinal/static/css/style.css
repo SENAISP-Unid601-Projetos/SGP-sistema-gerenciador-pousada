@@ -157,6 +157,26 @@ footer {
     color: #63AF7A;
 }
 
+/*TESTE SCREEN*/
+.nav-link {
+    padding: 15px;
+}
+
+.btn {
+    min-width: 150px;
+    padding: 10px 20px;
+}
+
+.nav-link:active, .btn:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: background-color 0.3s;
+}
+
+body {
+    touch-action: manipulation;
+}
+
+
 /* Media Queries para responsividade */
 @media (max-width: 768px) {
     .hero-text {
