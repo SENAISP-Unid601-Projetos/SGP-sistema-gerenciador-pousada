@@ -15,16 +15,15 @@
 <body>
     <header class="bg-dark text-white">
         <nav class="navbar navbar-expand-lg navbar-dark container">
-            <a class="navbar-brand" href="#">Pousada Quinta do Ypuã</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Pousada Quinta do Ypuã</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Acomodações</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#acomodacoes">Acomodações</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contatos">Contato</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-secondary text-dark" href="#">Reserve já</a></li>
                 </ul>
             </div>
@@ -79,7 +78,7 @@
     </section>
     <section class="p-5 bg-light">
         <div class="container text-center">
-            <h2 class="mb-5">Sobre a Pousada</h2>
+            <h2 class="mb-5" id="sobre">Sobre a Pousada</h2>
             <div class="row">
                 <div class="col-md-4">
                     <i class="fas fa-leaf fa-3x" style="color: #228B22;"></i>
@@ -102,7 +101,7 @@
     <section class="p-5">
         <div class="container">  
             <div class="text-center"> 
-                <h2 class="mb-5">Nossas Acomodações</h2>
+                <h2 class="mb-5" id="acomodacoes">Nossas Acomodações</h2>
                 </form>
             </div>
             <br>
@@ -147,7 +146,9 @@
                                     <i class="fas fa-wine-bottle" style="color: #222222;"></i>
                                 </p>
                                 <p class="price">R$ 590,00 / noite</p>
-                                <a href="chale.html" class="btn btn-primary">Ver Mais</a>
+                                <a href="{{ url_for('chale') }}">
+                                    <button type="button" class="btn btn-primary">Ver Mais</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -169,7 +170,9 @@
                                     <i class="fas fa-shower" style="color: #222222;"></i>
                                 </p>
                                 <p class="price">R$ 490,00 / noite</p>
-                                <a href="charrua.html" class="btn btn-primary">Ver Mais</a>
+                                <a href="{{ url_for('charrua') }}">
+                                    <button type="button" class="btn btn-primary">Ver Mais</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -188,7 +191,9 @@
                                     <i class="fas fa-utensils" style="color: #222222;"></i>
                                 </p>
                                 <p class="price">R$ 490,00 / noite</p>
-                                <a href="cabana.html" class="btn btn-primary">Ver Mais</a>
+                                <a href="{{ url_for('cabana') }}">
+                                    <button type="button" class="btn btn-primary">Ver Mais</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -207,7 +212,9 @@
                                     <i class="fas fa-utensils" style="color: #222222;"></i>
                                 </p>
                                 <p class="price">R$ 390,00 / noite</p>
-                                <a href="suite.html" class="btn btn-primary">Ver Mais</a>
+                                <a href="{{ url_for('suite') }}">
+                                    <button type="button" class="btn btn-primary">Ver Mais</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -224,7 +231,9 @@
                                     <i class="fas fa-shower" style="color: #222222;"></i>
                                 </p>
                                 <p class="price">R$ 100,00 / noite</p>
-                                <a href="estacionamento.html" class="btn btn-primary">Ver Mais</a>
+                                <a href="{{ url_for('estacionamento') }}">
+                                    <button type="button" class="btn btn-primary">Ver Mais</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -233,7 +242,7 @@
         </div>
     </section>
     <section class="p-5 bg-light">
-        <div class="container text-center">
+        <div class="container text-center" id="contatos">
             <h2>Contato</h2>
             <div class="row mt-4">
                 <div class="col-md-6">

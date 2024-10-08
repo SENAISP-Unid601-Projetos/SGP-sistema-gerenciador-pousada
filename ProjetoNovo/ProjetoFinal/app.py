@@ -24,8 +24,28 @@ def reserva():
 def domo():
     return render_template('domo.html')
 
+@app.route('/suite')
+def suite():
+    return render_template('suite.html')
+
+@app.route('/estacionamento')
+def estacionamento():
+    return render_template('estacionamento.html')
+
+@app.route('/charrua')
+def charrua():
+    return render_template('charrua.html')
+
+@app.route('/chale')
+def chale():
+    return render_template('chale.html')
+
+@app.route('/cabana')
+def cabana():
+    return render_template('cabana.html')
+
 @app.route('/addData', methods=['POST'])
-def addData():
+def submit_data():
     # Coletando os dados do formulário
     nome = request.form.get('nome')
     email = request.form.get('email')
