@@ -1,9 +1,21 @@
-implementar um carrinho de compras 
-melhorar o aspecto do login
-fazer funcionar o login
-mudar a tonalidade do fundo para algo mais escuro
-fazer funcionar o contato
-fazer com que as datas nao se conflitam com dados ja existentes
-fazer com que nao exista o mesmo email cadastrado
-fazer com que todos os dados de reserva sejam armazenados no mesmo banco
-fazer com que no formulario seja colocado a data correta
+FA
+
+Colocar nos comodos que eles devem ser alugados por no minimo 2 dias - hugo 
+melhorar o aspecto do login - hugo 
+mudar a tonalidade do fundo para algo mais escuro - hugo 
+mudar o border-radius das imagens - hugo 
+criar tela para adms com o intuito de verificar as infos do banco, por meio de uma barra de pesquisa - pesquisar por comodos - cc
+aba de "minhas reservas" - cc
+na reserva, fazer com que apareça uma aba de reserva concluida - hugo 
+
+BA
+
+implementar a barra de pesquisa - critico
+fazer com que as datas nao se conflitam com dados ja existentes - critico
+fazer funcionar o login - critico
+fazer chatbot - critico
+fazer funcionar o contato - desejavel
+
+SOFTWARE
+
+ngrok - software de api via roteamento do celular

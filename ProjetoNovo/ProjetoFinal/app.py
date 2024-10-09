@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from tinydb import TinyDB, Query
+from tinydb import TinyDB
 from datetime import datetime
 
 app = Flask(__name__)
