@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from tinydb import TinyDB
+from tinydb import TinyDB, Query
 from datetime import datetime
 
 app = Flask(__name__)
@@ -11,6 +11,8 @@ db = TinyDB('database.json')
 @app.route('/')
 def index():
     return render_template('index.html')
+    datas_reservadas = obter_datas_reservadas()  # Obtém todas as datas reservadas
+    return render_template('index.html', datas_reservadas=datas_reservadas)
 
 @app.route('/login')
 def login():
@@ -49,15 +51,21 @@ def submit_data():
     # Coletando os dados do formulário
     nome = request.form.get('nome')
     email = request.form.get('email')
+    quarto = request.form.get('quarto')
     checkin = request.form.get('checkin')
     checkout = request.form.get('checkout')
 
-# Verificando se os dados estão preenchidos
-    if nome and email and checkin and checkout:
+    # Verificando se os dados estão preenchidos
+    if nome and email and checkin and checkout and quarto:
+        # Verifica se há um conflito de reservas para o mesmo quarto
+        if verificar_conflito(quarto, checkin, checkout):
+            return 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!', 400
+
         # Salvando os dados no banco TinyDB
         db.insert({
             'nome': nome,
             'email': email,
+            'quarto': quarto,
             'checkin': checkin,
             'checkout': checkout,
             'data_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -66,6 +74,44 @@ def submit_data():
 
     return 'Erro: Todos os campos são obrigatórios!', 400
 
+# Função para verificar conflitos de reserva
+def verificar_conflito(quarto, checkin, checkout):
+    # Converter as datas para objetos datetime
+    checkin = datetime.strptime(checkin, '%Y-%m-%d')
+    checkout = datetime.strptime(checkout, '%Y-%m-%d')
+
+    # Buscar todas as reservas do mesmo quarto
+    Quarto = Query()
+    reservas = db.search(Quarto.quarto == quarto)
+
+    # Verificar se alguma reserva existente tem sobreposição de datas
+    for reserva in reservas:
+        checkin_existente = datetime.strptime(reserva['checkin'], '%Y-%m-%d')
+        checkout_existente = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
+
+        # Verifica se as datas se sobrepõem
+        if checkin <= checkout_existente and checkout >= checkin_existente:
+            return True  # Conflito encontrado
+
+    return False  # Sem conflitos
+
+    # Função para obter todas as datas reservadas
+def obter_datas_reservadas():
+    reservas = db.all()
+    datas_reservadas = []
+    
+    # Itera sobre todas as reservas e gera um intervalo de datas entre check-in e check-out
+    for reserva in reservas:
+        checkin = datetime.strptime(reserva['checkin'], '%Y-%m-%d')
+        checkout = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
+
+        # Gera as datas entre check-in e check-out
+        while checkin <= checkout:
+            datas_reservadas.append(checkin.strftime('%Y-%m-%d'))
+            checkin += timedelta(days=1)
+
+    return datas_reservadas
+    
 # Inicia o servidor
 if __name__ == '__main__':
     app.run(debug=True)
