@@ -12,7 +12,7 @@ db = TinyDB('database.json')
 def index():
     return render_template('index.html')
 
-@app.route('/lugares/login')
+@app.route('/login')
 def login():
     return render_template('login.html')
 
