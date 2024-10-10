@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from tinydb import TinyDB, Query
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
@@ -10,7 +10,6 @@ db = TinyDB('database.json')
 # Rota para a página principal (index)
 @app.route('/')
 def index():
-    return render_template('index.html')
     datas_reservadas = obter_datas_reservadas()  # Obtém todas as datas reservadas
     return render_template('index.html', datas_reservadas=datas_reservadas)
 
@@ -70,9 +69,22 @@ def submit_data():
             'checkout': checkout,
             'data_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         })
-        return redirect(url_for('index'))  # Redireciona de volta para a página inicial
+        return redirect(url_for('index'))
 
     return 'Erro: Todos os campos são obrigatórios!', 400
+
+# Rota para a página de administração
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    reservas = []
+    if request.method == 'POST':
+        comodo = request.form.get('comodo')
+        if comodo:
+            # Busca todas as reservas do cômodo informado
+            Quarto = Query()
+            reservas = db.search(Quarto.quarto == comodo)
+
+    return render_template('admin.html', reservas=reservas)
 
 # Função para verificar conflitos de reserva
 def verificar_conflito(quarto, checkin, checkout):
@@ -95,7 +107,7 @@ def verificar_conflito(quarto, checkin, checkout):
 
     return False  # Sem conflitos
 
-    # Função para obter todas as datas reservadas
+# Função para obter todas as datas reservadas
 def obter_datas_reservadas():
     reservas = db.all()
     datas_reservadas = []
@@ -111,7 +123,7 @@ def obter_datas_reservadas():
             checkin += timedelta(days=1)
 
     return datas_reservadas
-    
+
 # Inicia o servidor
 if __name__ == '__main__':
     app.run(debug=True)
