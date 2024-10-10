@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from tinydb import TinyDB, Query
 from datetime import datetime, timedelta
 
@@ -10,7 +10,6 @@ db = TinyDB('database.json')
 # Rota para a página principal (index)
 @app.route('/')
 def index():
-    return render_template('index.html')
     datas_reservadas = obter_datas_reservadas()  # Obtém todas as datas reservadas
     return render_template('index.html', datas_reservadas=datas_reservadas)
 
@@ -57,9 +56,10 @@ def submit_data():
 
     # Verificando se os dados estão preenchidos
     if nome and email and checkin and checkout and quarto:
+        
         # Verifica se há um conflito de reservas para o mesmo quarto
         if verificar_conflito(quarto, checkin, checkout):
-            return 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!', 400
+            return jsonify({'error': 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!'}), 400
 
         # Salvando os dados no banco TinyDB
         db.insert({
@@ -70,9 +70,9 @@ def submit_data():
             'checkout': checkout,
             'data_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         })
-        return redirect(url_for('index'))  # Redireciona de volta para a página inicial
+        return jsonify({'success': 'Reserva efetuada com sucesso!'}), 200  # Redireciona de volta para a página inicial
 
-    return 'Erro: Todos os campos são obrigatórios!', 400
+    return jsonify({'error': 'Erro: Todos os campos são obrigatórios!'}), 400
 
 # Função para verificar conflitos de reserva
 def verificar_conflito(quarto, checkin, checkout):
