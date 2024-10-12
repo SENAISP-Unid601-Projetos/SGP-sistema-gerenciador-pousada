@@ -7,20 +7,29 @@
     <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
-    <div class="container">
-        <form class="login">
-            <h2>Login</h2>
-            <div class="container-input">
-                <label for="username">Usuário</label>
-                <input type="text" id="username" required>
+    <body>
+        <div class="container">
+            <div class="login-box">
+                <div class="logo">
+                    <img src="/ProjetoNovo/ProjetoFinal/static/img/icon.ico" alt="Logo">
+                </div>
+                <h2>LOGIN</h2>
+                <form action="">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" placeholder="Digite seu email">
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" placeholder="Digite sua senha">
+                    </div>
+                    <div class="actions">
+                        <a href="#">Esqueceu a senha?</a>
+                        <a href="#">Primeiro login? Cadastre-se aqui</a>
+                    </div>
+                    <button type="submit" class="login-btn">ENTRAR</button>
+                </form>
             </div>
-            <div class="container-input">
-                <label for="password">Senha</label>
-                <input type="password" id="password" required>
-            </div>
-            <button class="btn" type="submit">Entrar</button>
-            <a href="#">Esqueceu a senha?</a>
-        </form>
-    </div>
-</body>
+        </div>
+    </body>
 </html>
