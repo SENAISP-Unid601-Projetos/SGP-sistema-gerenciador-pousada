@@ -69,7 +69,7 @@ def submit_data():
             'quarto': quarto,
             'checkin': checkin,
             'checkout': checkout,
-            'data_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            'data_registro': datetime.now().strftime('%Y-%m-%d' ' às ' '%H:%M:%S')
         })
         return jsonify({'success': 'Reserva efetuada com sucesso!'}), 200  # Redireciona de volta para a página inicial
 
@@ -104,7 +104,13 @@ def admin():
         termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
         Quarto = Query()
         # Busca insensível a maiúsculas/minúsculas usando regex
-        reservas = db.search(Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE))
+        reservas = db.search(
+            (Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+            (Quarto.nome.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+            (Quarto.email.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+            (Quarto.checkin.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+            (Quarto.checkout.matches(termo_pesquisa, flags=re.IGNORECASE)) 
+        )
     
     return render_template('admin.html', reservas=reservas)
 
