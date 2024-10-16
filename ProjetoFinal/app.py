@@ -1,21 +1,58 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from tinydb import TinyDB, Query
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import re
+import os
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret-key'  # Para usar flash messages
 
 # Inicializa o banco de dados TinyDB
 db = TinyDB('database.json')
+usuarios_db = db.table('usuarios')  # Tabela para usuários
+reservas_db = db.table('reservas')  # Tabela para reservas
+Usuario = Query()
 
-# Rota para a página principal (index)
+# Página principal
 @app.route('/')
 def index():
     datas_reservadas = obter_datas_reservadas()  # Obtém todas as datas reservadas
     return render_template('index.html', datas_reservadas=datas_reservadas)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        if 'signup' in request.form:  # Verifica se é um cadastro
+            nome = request.form['nome']
+            email = request.form['email']
+            senha = generate_password_hash(request.form['senha'])
+
+            # Verifica se o email já está registrado
+            usuario_existente = usuarios_db.search(Usuario.email == email)
+            if usuario_existente:
+                flash("Email já cadastrado.", "danger")
+                return redirect(url_for('login'))
+
+            # Adiciona o novo usuário ao banco de dados
+            usuarios_db.insert({'nome': nome, 'email': email, 'senha': senha})
+            flash("Cadastro realizado com sucesso!", "success")
+            return redirect(url_for('login'))
+
+        elif 'signin' in request.form:  # Verifica se é um login
+            email = request.form['email']
+            senha = request.form['senha']
+
+            # Busca o usuário no banco de dados
+            usuario = usuarios_db.search(Usuario.email == email)
+
+            if usuario and check_password_hash(usuario[0]['senha'], senha):
+                flash("Login realizado com sucesso!", "success")
+                return redirect(url_for('index'))
+            else:
+                flash("Email ou senha incorretos.", "danger")
+                return redirect(url_for('login'))
+
     return render_template('login.html')
 
 @app.route('/reserva')

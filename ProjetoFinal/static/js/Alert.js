@@ -20,3 +20,4 @@ document.querySelector('form').addEventListener('submit', function(event) {
     })
     .catch(error => console.error('Erro na requisição:', error));
 });
+
