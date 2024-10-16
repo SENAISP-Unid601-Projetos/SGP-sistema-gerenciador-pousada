@@ -101,7 +101,6 @@ def verificar_conflito(quarto, checkin, checkout):
 def admin():
     reservas = []
     if request.method == 'POST':
-<<<<<<< HEAD
         if 'ver_todas' in request.form:  # Verifica se o botão de "Ver todas" foi clicado
             reservas = db.all()  # Retorna todas as reservas do banco de dados
         else:
@@ -109,7 +108,6 @@ def admin():
             Quarto = Query()
             # Busca insensível a maiúsculas/minúsculas usando regex
             reservas = db.search(Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE))
-=======
         termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
         Quarto = Query()
         # Busca insensível a maiúsculas/minúsculas usando regex
@@ -120,7 +118,6 @@ def admin():
             (Quarto.checkin.matches(termo_pesquisa, flags=re.IGNORECASE)) |
             (Quarto.checkout.matches(termo_pesquisa, flags=re.IGNORECASE)) 
         )
->>>>>>> 213127e7bac3061f84cbb31cbd2a40d1a0adfb16
     
     return render_template('admin.html', reservas=reservas)
 
