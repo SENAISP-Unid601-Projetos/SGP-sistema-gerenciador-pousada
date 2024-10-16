@@ -1,10 +1,8 @@
 FE
 
 Colocar nos comodos que eles devem ser alugados por no minimo 2 dias - hugo 
-melhorar o aspecto do login - hugo 
 mudar a tonalidade do fundo para algo mais escuro - hugo 
 mudar o border-radius das imagens - hugo 
-criar tela para adms com o intuito de verificar as infos do banco, por meio de uma barra de pesquisa - pesquisar por comodos - cc
 aba de "minhas reservas" - cc
 na reserva, fazer com que apareça uma aba de reserva concluida - desejavel hugo 
 
@@ -15,6 +13,7 @@ fazer chatbot - critico
 fazer funcionar o contato - desejavel
 fazer essa tela ter a interação com o banco, seja excluir os dados diretamente
 fazer um botao para cancelar reserva
+para reservar quartos, deve estar logado
 
 SOFTWARE
 
