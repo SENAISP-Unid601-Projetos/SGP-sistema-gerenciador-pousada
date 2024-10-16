@@ -96,17 +96,21 @@ def verificar_conflito(quarto, checkin, checkout):
 
     return False  # Sem conflitos
 
-    # Rota para a página de administração com busca
+  # Rota para a página de administração com busca e exibição de todas as reservas
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     reservas = []
     if request.method == 'POST':
-        termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
-        Quarto = Query()
-        # Busca insensível a maiúsculas/minúsculas usando regex
-        reservas = db.search(Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE))
+        if 'ver_todas' in request.form:  # Verifica se o botão de "Ver todas" foi clicado
+            reservas = db.all()  # Retorna todas as reservas do banco de dados
+        else:
+            termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
+            Quarto = Query()
+            # Busca insensível a maiúsculas/minúsculas usando regex
+            reservas = db.search(Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE))
     
     return render_template('admin.html', reservas=reservas)
+
 
 # Função para verificar conflitos de reserva
 def verificar_conflito(quarto, checkin, checkout):

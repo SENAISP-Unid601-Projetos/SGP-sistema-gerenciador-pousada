@@ -45,6 +45,18 @@ h2 {
     border-color: #004494;
 }
 
+.btn-secondary {
+    background-color: #5eb95e; /* Cor para combinar com o título */
+    border-color: #4b582e; /* Cor de borda para combinar */
+    transition: background-color 0.2s ease-in-out;
+    margin-left: 10px; /* Espaço entre os botões */
+}
+
+.btn-secondary:hover {
+    background-color: #1e2b00; /* Cor mais escura ao passar o mouse */
+    border-color: #1e2b00;
+}
+
 .table {
     margin-top: 20px;
 }
