@@ -1,17 +1,12 @@
 FE
 
-Colocar nos comodos que eles devem ser alugados por no minimo 2 dias - hugo 
-mudar a tonalidade do fundo para algo mais escuro - hugo 
-mudar o border-radius das imagens - hugo 
+
 aba de "minhas reservas" - cc
-na reserva, fazer com que apareça uma aba de reserva concluida - desejavel hugo 
 
 BE
 
-fazer funcionar o login - critico
 fazer chatbot - critico
 fazer funcionar o contato - desejavel
-fazer essa tela ter a interação com o banco, seja excluir os dados diretamente
 fazer um botao para cancelar reserva
 para reservar quartos, deve estar logado
 
