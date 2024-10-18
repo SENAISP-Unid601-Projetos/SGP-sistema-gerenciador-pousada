@@ -17,16 +17,14 @@
 <body>
     <header class="text-dark py-3">
         <nav class="navbar navbar-expand-lg navbar-light container">
-            <a class="navbar-brand" href="#">Pousada Quinta do Ypuã</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Pousada Quinta do Ypuã</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#acomodacoes">Acomodações</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-secondary" href="#">Reserve já</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#descricao">Descrição</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contatos">Contato</a></li>
                 </ul>
             </div>
         </nav>
@@ -115,7 +113,7 @@
             <div class="col-12">
                 <div class="card shadow-sm border-0">
                     <div class="card-body">
-                        <h3 class="card-title">Descrição da Acomodação</h3>
+                        <h3 class="card-title" id="descricao">Descrição da Acomodação</h3>
                         <p class="card-text">O Domo é a mais recente novidade da pousada, trazendo um conceito de hospedagem totalmente único. Projetado nos modernos padrões arquitetônicos dos domos geodésicos, esta acomodação oferece uma experiência diferenciada e inovadora. Com seu design futurista e sustentável, o Domo proporciona um ambiente exclusivo, perfeito para quem busca algo fora do comum, sem abrir mão de conforto e estilo.</p>
                         <h5 class="text-secondary">Detalhes da Acomodação:</h5>
                         <ul class="list-group list-group-flush">
@@ -160,7 +158,7 @@
             </div>
         </div>
     </div>
-    <footer class="bg-dark text-white py-4 mt-5">
+    <footer class="bg-dark text-white py-4 mt-5" id="contatos">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
