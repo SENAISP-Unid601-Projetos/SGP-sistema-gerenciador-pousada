@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li>
+        <a href="#" class="logo">
+          <img src="/static/img/logo.jpg" alt="">
+          <span class="nav-item">Admin dashboard</span>
+        </a>
+      </li>
+      <li><a href="#">
+        <i class="fas fa-home"></i>
+        <span class="nav-item">Inicio</span>
+      </a></li>
+      <li><a href="#">
+        <i class="fas fa-user"></i>
+        <span class="nav-item">Gerenciamento</span>
+      </a></li>
+      <li><a href="#">
+        <i class="fas fa-wallet"></i>
+        <span class="nav-item">Wallet</span>
+      </a></li>
+      <li><a href="#">
+        <i class="fas fa-chart-bar"></i>
+        <span class="nav-item">Analises</span>
+      </a></li>
+
+      
+      <li><a href="#" class="logout">
+        <i class="fas fa-sign-out-alt"></i>
+        <span class="nav-item">Log out</span>
+      </a></li>
+    </ul>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="card">
+        <div class="card-content">
+            <h3>Número de Funcionários</h3>
+            <h1 id="num-funcionarios">50</h1>
+        </div>
+        <div class="card-icon">
+            <i class="fas fa-users"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-content">
+            <h3>Reservas Feitas</h3>
+            <h1 id="num-reservas">120</h1>
+        </div>
+        <div class="card-icon">
+            <i class="fas fa-clipboard-list"></i>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-content">
+            <h3>Satisfação (%)</h3>
+            <h1 id="porcentagem-satisfacao">85%</h1>
+        </div>
+        <div class="card-icon">
+            <i class="fas fa-chart-line"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Container dos Gráficos -->
+<div class="charts-row">
+  <div class="chart-container">
+      <canvas id="linha-chart"></canvas>
+  </div>
+
+  <div class="chart-container">
+      <canvas id="satisfacaoChart"></canvas>
+  </div>
+</div>
+
+<!-- Card de Satisfação -->
+<div class="satisfaction-card">
+  <h3>Satisfação dos Clientes</h3>
+  <div class="satisfaction-content">
+      <p class="satisfaction-percentage">85%</p>
+      <div class="progress-bar">
+          <div class="progress" style="width: 85%;"></div>
+      </div>
+  </div>
+</div>
+
+<!-- Feedback dos Clientes (opcional) -->
+<div class="feedback-carousel">
+  <h4>Feedback dos Clientes</h4>
+  <div class="feedback-item">“Ótima experiência! Recomendo a todos.”</div>
+  <div class="feedback-item">“O serviço foi excelente e os funcionários muito atenciosos.”</div>
+  <div class="feedback-item">“Ambiente agradável, com certeza voltarei!”</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
@@ -6,7 +6,7 @@ import re
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret-key'  # Para usar flash messages
+app.config['SECRET_KEY'] = 'secret-key'  
 
 # Inicializa o banco de dados TinyDB
 db = TinyDB('database.json')
@@ -31,12 +31,10 @@ def login():
             # Verifica se o email já está registrado
             usuario_existente = usuarios_db.search(Usuario.email == email)
             if usuario_existente:
-                flash("Email já cadastrado.", "danger")
                 return redirect(url_for('login'))
 
             # Adiciona o novo usuário ao banco de dados
             usuarios_db.insert({'nome': nome, 'email': email, 'senha': senha})
-            flash("Cadastro realizado com sucesso!", "success")
             return redirect(url_for('login'))
 
         elif 'signin' in request.form:  # Verifica se é um login
@@ -47,10 +45,8 @@ def login():
             usuario = usuarios_db.search(Usuario.email == email)
 
             if usuario and check_password_hash(usuario[0]['senha'], senha):
-                flash("Login realizado com sucesso!", "success")
                 return redirect(url_for('index'))
             else:
-                flash("Email ou senha incorretos.", "danger")
                 return redirect(url_for('login'))
 
     return render_template('login.html')
@@ -158,6 +154,10 @@ def admin():
     
     return render_template('admin.html', reservas=reservas)
 
+# Rota para verificar o DashBoard
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    return render_template('dashboard.html')
 
 # Função para verificar conflitos de reserva
 def verificar_conflito(quarto, checkin, checkout):
