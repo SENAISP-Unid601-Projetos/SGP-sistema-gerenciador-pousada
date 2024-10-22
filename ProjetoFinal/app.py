@@ -100,6 +100,30 @@ def submit_data():
 def reserva():
     return render_template('reserva.html')
 
+@app.route('/domo')
+def domo():
+    return render_template('domo.html')
+
+@app.route('/suite')
+def suite():
+    return render_template('suite.html')
+
+@app.route('/estacionamento')
+def estacionamento():
+    return render_template('estacionamento.html')
+
+@app.route('/charrua')
+def charrua():
+    return render_template('charrua.html')
+
+@app.route('/chale')
+def chale():
+    return render_template('chale.html')
+
+@app.route('/cabana')
+def cabana():
+    return render_template('cabana.html')
+
 @app.route('/meu_perfil')
 def meu_perfil():
     if 'usuario_id' not in session:

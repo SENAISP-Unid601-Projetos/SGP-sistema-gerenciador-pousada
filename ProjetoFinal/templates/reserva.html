@@ -6,46 +6,7 @@
     <title>Pousada Quinta do Ypuã - Reserve já</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .carousel-item {
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-        /* Adiciona border-radius ao carrossel */
-        #carouselExampleIndicators {
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        .carousel-inner img {
-            border-radius: 15px;
-        }
-        body {
-            background-color: #f2f2f2;
-        }
-        header, .section {
-            background-color: #e1e1e1;
-            color: black;
-        }
-        .navbar-brand {
-            color: #228B22 !important;
-        }
-        .nav-link {
-            color: black !important;
-        }
-        .nav-link.btn {
-            color: white !important;
-        }
-        .btn-primary {
-            background-color: #228B22;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #196a16;
-        }
-        .price {
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reserva.css') }}">
 </head>
 <body>
     <header class="text-dark py-3">
