@@ -3,7 +3,6 @@ from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import re
-import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'  
@@ -96,13 +95,13 @@ def submit_data():
             return jsonify({'error': 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!'}), 400
 
         # Salvando os dados no banco TinyDB
-        db.insert({
+        reservas_db.insert({
             'nome': nome,
             'email': email,
             'quarto': quarto,
             'checkin': checkin,
             'checkout': checkout,
-            'data_registro': datetime.now().strftime('%Y-%m-%d' ' às ' '%H:%M:%S')
+            'data_registro': datetime.now().strftime('%d/%m/%Y às %H:%M:%S')  # Formato DD/MM/AAAA
         })
         return jsonify({'success': 'Reserva efetuada com sucesso!'}), 200  # Redireciona de volta para a página inicial
 
@@ -116,7 +115,7 @@ def verificar_conflito(quarto, checkin, checkout):
 
     # Buscar todas as reservas do mesmo quarto
     Quarto = Query()
-    reservas = db.search(Quarto.quarto == quarto)
+    reservas = reservas_db.search(Quarto.quarto == quarto)
 
     # Verificar se alguma reserva existente tem sobreposição de datas
     for reserva in reservas:
@@ -129,29 +128,30 @@ def verificar_conflito(quarto, checkin, checkout):
 
     return False  # Sem conflitos
 
-  # Rota para a página de administração com busca e exibição de todas as reservas
+# Rota para a página de administração com busca e exibição de todas as reservas
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     reservas = []
     if request.method == 'POST':
         if 'ver_todas' in request.form:  # Verifica se o botão de "Ver todas" foi clicado
-            reservas = db.all()  # Retorna todas as reservas do banco de dados
+            reservas = reservas_db.all()  # Retorna todas as reservas do banco de dados
         else:
             termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
             Quarto = Query()
             # Busca insensível a maiúsculas/minúsculas usando regex
-            reservas = db.search(Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE))
-        termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
-        Quarto = Query()
-        # Busca insensível a maiúsculas/minúsculas usando regex
-        reservas = db.search(
-            (Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-            (Quarto.nome.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-            (Quarto.email.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-            (Quarto.checkin.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-            (Quarto.checkout.matches(termo_pesquisa, flags=re.IGNORECASE)) 
-        )
-    
+            reservas = reservas_db.search(
+                (Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+                (Quarto.nome.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+                (Quarto.email.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+                (Quarto.checkin.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+                (Quarto.checkout.matches(termo_pesquisa, flags=re.IGNORECASE)) 
+            )
+
+    # Formata as datas antes de passar para o template
+    for reserva in reservas:
+        reserva['checkin'] = datetime.strptime(reserva['checkin'], '%Y-%m-%d').strftime('%d/%m/%Y')
+        reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
+
     return render_template('admin.html', reservas=reservas)
 
 # Rota para verificar o DashBoard
@@ -159,26 +159,9 @@ def admin():
 def dashboard():
     return render_template('dashboard.html')
 
-# Função para verificar conflitos de reserva
-def verificar_conflito(quarto, checkin, checkout):
-    checkin = datetime.strptime(checkin, '%Y-%m-%d')
-    checkout = datetime.strptime(checkout, '%Y-%m-%d')
-
-    Quarto = Query()
-    reservas = db.search(Quarto.quarto == quarto)
-
-    for reserva in reservas:
-        checkin_existente = datetime.strptime(reserva['checkin'], '%Y-%m-%d')
-        checkout_existente = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
-
-        if checkin <= checkout_existente and checkout >= checkin_existente:
-            return True  # Conflito encontrado
-
-    return False  # Sem conflitos
-
 # Função para obter todas as datas reservadas
 def obter_datas_reservadas():
-    reservas = db.all()
+    reservas = reservas_db.all()
     datas_reservadas = []
     
     for reserva in reservas:
@@ -186,7 +169,7 @@ def obter_datas_reservadas():
         checkout = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
 
         while checkin <= checkout:
-            datas_reservadas.append(checkin.strftime('%Y-%m-%d'))
+            datas_reservadas.append(checkin.strftime('%d/%m/%Y'))  # Formato DD/MM/AAAA
             checkin += timedelta(days=1)
 
     return datas_reservadas
