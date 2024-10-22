@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 import re
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret-key'  
+app.config['SECRET_KEY'] = 'secret-key'  # Chave secreta para gerenciamento de sessões
 
 # Inicializa o banco de dados TinyDB
 db = TinyDB('database.json')
@@ -44,39 +44,21 @@ def login():
             usuario = usuarios_db.search(Usuario.email == email)
 
             if usuario and check_password_hash(usuario[0]['senha'], senha):
+                # Login bem-sucedido, armazena informações do usuário na sessão
+                session['usuario_id'] = usuario[0].doc_id
+                session['nome'] = usuario[0]['nome']
+                session['email'] = usuario[0]['email']
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
 
     return render_template('login.html')
 
-@app.route('/reserva')
-def reserva():
-    return render_template('reserva.html')
-
-@app.route('/domo')
-def domo():
-    return render_template('domo.html')
-
-@app.route('/suite')
-def suite():
-    return render_template('suite.html')
-
-@app.route('/estacionamento')
-def estacionamento():
-    return render_template('estacionamento.html')
-
-@app.route('/charrua')
-def charrua():
-    return render_template('charrua.html')
-
-@app.route('/chale')
-def chale():
-    return render_template('chale.html')
-
-@app.route('/cabana')
-def cabana():
-    return render_template('cabana.html')
+@app.route('/logout')
+def logout():
+    # Limpa a sessão do usuário ao fazer logout
+    session.clear()
+    return redirect(url_for('index'))
 
 @app.route('/addData', methods=['POST'])
 def submit_data():
@@ -84,14 +66,21 @@ def submit_data():
     nome = request.form.get('nome')
     email = request.form.get('email')
     quarto = request.form.get('quarto')
-    checkin = request.form.get('checkin')
-    checkout = request.form.get('checkout')
+    checkin = request.form.get('checkin')  # Ex: 25/01/2005
+    checkout = request.form.get('checkout')  # Ex: 30/01/2005
+
+    # Convertendo as datas para o formato esperado
+    try:
+        checkin_formatado = datetime.strptime(checkin, '%d/%m/%Y').strftime('%Y-%m-%d')
+        checkout_formatado = datetime.strptime(checkout, '%d/%m/%Y').strftime('%Y-%m-%d')
+    except ValueError:
+        return jsonify({'error': 'Erro: Formato de data inválido. Utilize dia/mês/ano!'}), 400
 
     # Verificando se os dados estão preenchidos
-    if nome and email and checkin and checkout and quarto:
+    if nome and email and checkin_formatado and checkout_formatado and quarto:
         
         # Verifica se há um conflito de reservas para o mesmo quarto
-        if verificar_conflito(quarto, checkin, checkout):
+        if verificar_conflito(quarto, checkin_formatado, checkout_formatado):
             return jsonify({'error': 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!'}), 400
 
         # Salvando os dados no banco TinyDB
@@ -99,36 +88,28 @@ def submit_data():
             'nome': nome,
             'email': email,
             'quarto': quarto,
-            'checkin': checkin,
-            'checkout': checkout,
+            'checkin': checkin_formatado,
+            'checkout': checkout_formatado,
             'data_registro': datetime.now().strftime('%d/%m/%Y às %H:%M:%S')  # Formato DD/MM/AAAA
         })
         return jsonify({'success': 'Reserva efetuada com sucesso!'}), 200  # Redireciona de volta para a página inicial
 
     return jsonify({'error': 'Erro: Todos os campos são obrigatórios!'}), 400
 
-# Função para verificar conflitos de reserva
-def verificar_conflito(quarto, checkin, checkout):
-    # Converter as datas para objetos datetime
-    checkin = datetime.strptime(checkin, '%Y-%m-%d')
-    checkout = datetime.strptime(checkout, '%Y-%m-%d')
+@app.route('/reserva')
+def reserva():
+    return render_template('reserva.html')
 
-    # Buscar todas as reservas do mesmo quarto
-    Quarto = Query()
-    reservas = reservas_db.search(Quarto.quarto == quarto)
+@app.route('/meu_perfil')
+def meu_perfil():
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))  # Redireciona se não estiver logado
+    
+    usuario_id = session['usuario_id']
+    reservas_usuario = reservas_db.search(Usuario.email == session['email'])  # Busca as reservas do usuário
 
-    # Verificar se alguma reserva existente tem sobreposição de datas
-    for reserva in reservas:
-        checkin_existente = datetime.strptime(reserva['checkin'], '%Y-%m-%d')
-        checkout_existente = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
+    return render_template('meu_perfil.html', user=session, reservas=reservas_usuario)
 
-        # Verifica se as datas se sobrepõem
-        if checkin <= checkout_existente and checkout >= checkin_existente:
-            return True  # Conflito encontrado
-
-    return False  # Sem conflitos
-
-# Rota para a página de administração com busca e exibição de todas as reservas
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     reservas = []
@@ -154,11 +135,6 @@ def admin():
 
     return render_template('admin.html', reservas=reservas)
 
-# Rota para verificar o DashBoard
-@app.route('/dashboard', methods=['GET'])
-def dashboard():
-    return render_template('dashboard.html')
-
 # Função para obter todas as datas reservadas
 def obter_datas_reservadas():
     reservas = reservas_db.all()
@@ -173,6 +149,27 @@ def obter_datas_reservadas():
             checkin += timedelta(days=1)
 
     return datas_reservadas
+
+# Função para verificar conflitos de reserva
+def verificar_conflito(quarto, checkin, checkout):
+    # Converter as datas para objetos datetime
+    checkin = datetime.strptime(checkin, '%Y-%m-%d')
+    checkout = datetime.strptime(checkout, '%Y-%m-%d')
+
+    # Buscar todas as reservas do mesmo quarto
+    Quarto = Query()
+    reservas = reservas_db.search(Quarto.quarto == quarto)
+
+    # Verificar se alguma reserva existente tem sobreposição de datas
+    for reserva in reservas:
+        checkin_existente = datetime.strptime(reserva['checkin'], '%Y-%m-%d')
+        checkout_existente = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
+
+        # Verifica se as datas se sobrepõem
+        if checkin <= checkout_existente and checkout >= checkin_existente:
+            return True  # Conflito encontrado
+
+    return False  # Sem conflitos
 
 # Inicia o servidor
 if __name__ == '__main__':

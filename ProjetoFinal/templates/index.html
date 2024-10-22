@@ -9,8 +9,10 @@
     <title>Quinta Do Ypuã</title>
 
     <link rel="shortcut icon" type="imagex/png" href="/static/img/icon.ico">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css"> <!-- Não há mais CSS de perfil aqui -->
 </head>
+</html>
+
 <body>
     <header class="home">
         <div class="hero">
@@ -25,10 +27,20 @@
                             <li class="nav-item"><a class="nav-link" href="#sobre">SOBRE</a></li>
                             <li class="nav-item"><a class="nav-link" href="#acomodacao">ACOMODAÇÕES</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ url_for('reserva') }}">RESERVE</a></li>
+                            
+                            {% if session.get('usuario_id') %}
+                                <!-- Link para "Meu Perfil" se o usuário estiver logado -->
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('meu_perfil') }}">MEU PERFIL</a></li>
+                                <a href="{{ url_for('logout') }}">
+                                    <button type="button" class="btn btn-outline-light ms-3">LOGOUT</button>
+                                </a>
+                            {% else %}
+                                <!-- Link para login se o usuário não estiver logado -->
+                                <a href="{{ url_for('login') }}">
+                                    <button type="button" class="btn btn-outline-light ms-3">LOGIN</button>
+                                </a>
+                            {% endif %}
                         </ul>
-                        <a href="{{ url_for('login') }}">
-                            <button type="button" class="btn btn-outline-light ms-3">LOGIN</button>
-                        </a>
                     </div>
                 </div>
             </nav>

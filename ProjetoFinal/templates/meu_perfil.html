@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">Quinta do Ypuã</a>
+        <ul class="menu">
+            <li><a href="{{ url_for('index') }}">Início</a></li>
+            <li><a href="{{ url_for('reserva') }}">Reservar</a></li>
+            <li><a href="{{ url_for('meu_perfil') }}">Meu Perfil</a></li>
+            <li><a href="{{ url_for('logout') }}">Sair</a></li>
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <h1>Meu Perfil</h1>
+        <div class="profile-info">
+            <p><strong>Nome:</strong> {{ user.name }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+
+        <h2>Minhas Reservas</h2>
+        
+        <div class="reservas-container">
+            {% if reservas %}
+                {% for reserva in reservas %}
+                    <div class="reserva-card">
+                        <h3>Reserva - {{ reserva.quarto }}</h3>
+                        <p><strong>Check-in:</strong> {{ reserva.checkin }}</p>
+                        <p><strong>Check-out:</strong> {{ reserva.checkout }}</p>
+                        <p><strong>Data de Registro:</strong> {{ reserva.data_registro }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Você não possui reservas.</p>
+            {% endif %}
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2024 Quinta do Ypuã. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
