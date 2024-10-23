@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify, s
 from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
+from functools import wraps
 import re
 
 app = Flask(__name__)
@@ -60,13 +61,25 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+# Decorator para verificar se o usuário está logado
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'usuario_id' not in session:
+            return redirect(url_for('login'))  # Redireciona para a página de login
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/meu_perfil')
+@login_required  # Aplica o decorator
 def meu_perfil():
-    if 'usuario_id' not in session:
-        return redirect(url_for('login'))  # Redireciona se não estiver logado
-    
     usuario_id = session['usuario_id']
     reservas_usuario = reservas_db.search(Usuario.email == session['email'])  # Busca as reservas do usuário
+
+    for reserva in reservas_usuario:
+        reserva['checkin'] = datetime.strptime(reserva['checkin'], '%Y-%m-%d').strftime('%d/%m/%Y')
+        reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
+        reserva['data_registro'] = datetime.strptime(reserva['data_registro'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y às %H:%M:%S')
 
     return render_template('meu_perfil.html', user=session, reservas=reservas_usuario)
 
@@ -99,25 +112,27 @@ def cabana():
     return render_template('cabana.html')
 
 @app.route('/addData', methods=['POST'])
+@login_required  # Aplica o decorator
 def submit_data():
     # Coletando os dados do formulário
-    nome = request.form.get('nome')
-    email = request.form.get('email')
     quarto = request.form.get('quarto')
     checkin = request.form.get('checkin')  
     checkout = request.form.get('checkout')  
 
+    # Obtendo o e-mail do usuário logado na sessão
+    email = session['email']
+
     # Verificando se os dados estão preenchidos
-    if nome and email and checkin and checkout and quarto:
+    if email and checkin and checkout and quarto:
         
         # Verifica se há um conflito de reservas para o mesmo quarto
         if verificar_conflito(quarto, checkin, checkout):
             return jsonify({'error': 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!'}), 400
 
-        # Salvando os dados no banco TinyDB (as datas já estão no formato correto)
+        # Salvando os dados no banco TinyDB
         reservas_db.insert({
-            'nome': nome,
-            'email': email,
+            'nome': session['nome'],  # Nome do usuário logado
+            'email': email,  # E-mail do usuário logado
             'quarto': quarto,
             'checkin': checkin,  # Formato AAAA-MM-DD
             'checkout': checkout,  # Formato AAAA-MM-DD
@@ -164,6 +179,7 @@ def verificar_conflito(quarto, checkin, checkout):
     return False  # Sem conflitos
 
 @app.route('/admin', methods=['GET', 'POST'])
+@login_required  # Aplica o decorator
 def admin():
     reservas = []
     if request.method == 'POST':
