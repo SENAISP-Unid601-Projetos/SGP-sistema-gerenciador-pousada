@@ -71,15 +71,23 @@ def login_required(f):
     return decorated_function
 
 @app.route('/meu_perfil')
-@login_required  # Aplica o decorator
 def meu_perfil():
+    if 'usuario_id' not in session:
+        return redirect(url_for('login'))  # Redireciona se não estiver logado
+    
     usuario_id = session['usuario_id']
     reservas_usuario = reservas_db.search(Usuario.email == session['email'])  # Busca as reservas do usuário
 
+    # Formata as datas antes de passar para o template, se houver reservas
     for reserva in reservas_usuario:
-        reserva['checkin'] = datetime.strptime(reserva['checkin'], '%Y-%m-%d').strftime('%d/%m/%Y')
-        reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
-        reserva['data_registro'] = datetime.strptime(reserva['data_registro'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y às %H:%M:%S')
+        try:
+            if 'checkin' in reserva and 'checkout' in reserva:
+                reserva['checkin'] = datetime.strptime(reserva['checkin'], '%Y-%m-%d').strftime('%d/%m/%Y')
+                reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
+                reserva['data_registro'] = datetime.strptime(reserva['data_registro'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y às %H:%M:%S')
+        except (ValueError, KeyError) as e:
+            # Trate o erro de formatação, se necessário
+            print(f"Erro ao formatar a reserva: {reserva}, erro: {e}")
 
     return render_template('meu_perfil.html', user=session, reservas=reservas_usuario)
 
