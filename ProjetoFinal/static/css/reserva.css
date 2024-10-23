@@ -36,3 +36,9 @@ header, .section {
     font-weight: bold;
     font-size: 1.2rem;
 }
+.display-4 {
+    font-weight: 700; /* Ou use 'bold' */
+}
+.titulo-destaque {
+    font-weight: 800; /* Define um peso mais grosso */
+}
