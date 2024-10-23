@@ -2,6 +2,8 @@ FE
 
 mudar o estilo do reserva e do meu perfil
 mudar o icone do meu perfil
+adicionar o icone em todas as abas
+adicionar um botao de excluir no perfil e no admin
 
 aba de "minhas reservas" - cc
 
@@ -10,8 +12,6 @@ BE
 fazer chatbot - critico
 fazer funcionar o contato - desejavel
 fazer um botao para cancelar reserva
-para reservar quartos, deve estar logado
-aparecer nome no meu perfil
 
 SOFTWARE
 
