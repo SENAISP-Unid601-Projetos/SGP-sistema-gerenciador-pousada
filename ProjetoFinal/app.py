@@ -128,33 +128,41 @@ def cabana():
     return render_template('cabana.html')
 
 @app.route('/addData', methods=['POST'])
-@login_required  # Aplica o decorator
+@login_required
 def submit_data():
-    # Coletando os dados do formulário
     quarto = request.form.get('quarto')
     checkin = request.form.get('checkin')  
     checkout = request.form.get('checkout')  
-
-    # Obtendo o e-mail do usuário logado na sessão
     email = session['email']
 
-    # Verificando se os dados estão preenchidos
+    # Verifique se os dados estão preenchidos
     if email and checkin and checkout and quarto:
+        # Converter as datas para objetos datetime
+        checkin_date = datetime.strptime(checkin, '%Y-%m-%d')
+        checkout_date = datetime.strptime(checkout, '%Y-%m-%d')
+
+        # Verifique se a data de check-out é posterior à data de check-in
+        if checkin_date >= checkout_date:
+            return jsonify({'error': 'Erro: A data de check-out deve ser posterior à data de check-in!'}), 400
         
+        # Verifique se a data de check-in não é uma data passada
+        if checkin_date < datetime.now():
+            return jsonify({'error': 'Erro: A data de check-in não pode ser uma data passada!'}), 400
+
         # Verifica se há um conflito de reservas para o mesmo quarto
         if verificar_conflito(quarto, checkin, checkout):
             return jsonify({'error': 'Erro: Já existe uma reserva para este cômodo nas datas selecionadas!'}), 400
 
         # Salvando os dados no banco TinyDB
         reservas_db.insert({
-            'nome': session['nome'],  # Nome do usuário logado
-            'email': email,  # E-mail do usuário logado
+            'nome': session['nome'],
+            'email': email,
             'quarto': quarto,
-            'checkin': checkin,  # Formato AAAA-MM-DD
-            'checkout': checkout,  # Formato AAAA-MM-DD
-            'data_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Formato ISO
+            'checkin': checkin,
+            'checkout': checkout,
+            'data_registro': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         })
-        return jsonify({'success': 'Reserva efetuada com sucesso!'}), 200  # Redireciona de volta para a página inicial
+        return jsonify({'success': 'Reserva efetuada com sucesso!'}), 200
 
     return jsonify({'error': 'Erro: Todos os campos são obrigatórios!'}), 400
 
