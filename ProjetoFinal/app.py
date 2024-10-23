@@ -14,6 +14,10 @@ usuarios_db = db.table('usuarios')  # Tabela para usuários
 reservas_db = db.table('reservas')  # Tabela para reservas
 Usuario = Query()
 
+
+# Defina o e-mail do administrador
+ADMIN_EMAIL = 'admin@gmail.com' # senha: Admin2024
+
 # Página principal
 @app.route('/')
 def index():
@@ -33,8 +37,11 @@ def login():
             if usuario_existente:
                 return redirect(url_for('login'))
 
+            # Verifica se é o admin
+            is_admin = email == ADMIN_EMAIL
+
             # Adiciona o novo usuário ao banco de dados
-            usuarios_db.insert({'nome': nome, 'email': email, 'senha': senha})
+            usuarios_db.insert({'nome': nome, 'email': email, 'senha': senha, 'admin': is_admin})
             return redirect(url_for('login'))
 
         elif 'signin' in request.form:  # Verifica se é um login
@@ -49,6 +56,7 @@ def login():
                 session['usuario_id'] = usuario[0].doc_id
                 session['nome'] = usuario[0]['nome']
                 session['email'] = usuario[0]['email']
+                session['admin'] = usuario[0].get('admin', False)  # Define a sessão de admin
                 return redirect(url_for('index'))
             else:
                 return redirect(url_for('login'))
@@ -186,8 +194,18 @@ def verificar_conflito(quarto, checkin, checkout):
 
     return False  # Sem conflitos
 
+# Decorator para verificar se o usuário é admin
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('admin'):
+            return redirect(url_for('index'))  # Redireciona para a página principal
+        return f(*args, **kwargs)
+    return decorated_function
+
 @app.route('/admin', methods=['GET', 'POST'])
 @login_required  # Aplica o decorator
+@admin_required
 def admin():
     reservas = []
     if request.method == 'POST':
