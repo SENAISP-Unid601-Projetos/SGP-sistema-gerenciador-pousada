@@ -34,6 +34,12 @@
                         <p><strong>Check-in:</strong> {{ reserva.checkin }}</p>
                         <p><strong>Check-out:</strong> {{ reserva.checkout }}</p>
                         <p><strong>Data de Registro:</strong> {{ reserva.data_registro }}</p>
+                        
+                        <!-- Botão para excluir reserva -->
+                        <form action="{{ url_for('excluir_reserva') }}" method="POST">
+                            <input type="hidden" name="reserva_id" value="{{ reserva.doc_id }}">
+                            <button type="submit" class="btn-excluir">Excluir Reserva</button>
+                        </form>
                     </div>
                 {% endfor %}
             {% else %}

@@ -104,6 +104,23 @@ body {
     padding: 20px 0;
 }
 
+/* Estilo do botão Excluir */
+.btn-excluir {
+    background-color: #e74c3c; /* Cor vermelho para excluir */
+    color: #fff; /* Texto branco */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-excluir:hover {
+    background-color: #c0392b; /* Escurecer o vermelho ao passar o mouse */
+}
+
+
 /* Media Queries */
 @media (max-width: 768px) {
     .profile-container {

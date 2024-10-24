@@ -184,6 +184,19 @@ def obter_datas_reservadas():
 
     return datas_reservadas
 
+@app.route('/excluir_reserva', methods=['POST'])
+@login_required
+def excluir_reserva():
+    reserva_id = request.form.get('reserva_id')
+
+    # Verifica se a reserva existe e se pertence ao usuário logado
+    reserva = reservas_db.get(doc_id=int(reserva_id))
+    if reserva and reserva['email'] == session['email']:
+        reservas_db.remove(doc_ids=[int(reserva_id)])
+        return redirect(url_for('meu_perfil'))
+    
+    return jsonify({'error': 'Erro: Não foi possível excluir a reserva.'}), 400
+
 # Função para verificar conflitos de reserva
 def verificar_conflito(quarto, checkin, checkout):
     # Converter as datas para objetos datetime
