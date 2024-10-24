@@ -14,9 +14,8 @@ usuarios_db = db.table('usuarios')  # Tabela para usuários
 reservas_db = db.table('reservas')  # Tabela para reservas
 Usuario = Query()
 
-
 # Defina o e-mail do administrador
-ADMIN_EMAIL = 'admin@gmail.com' # senha: Admin2024
+ADMIN_EMAIL = 'admin@gmail.com'  # senha: Admin2024
 
 # Página principal
 @app.route('/')
@@ -144,10 +143,14 @@ def submit_data():
         # Verifique se a data de check-out é posterior à data de check-in
         if checkin_date >= checkout_date:
             return jsonify({'error': 'Erro: A data de check-out deve ser posterior à data de check-in!'}), 400
-        
+
         # Verifique se a data de check-in não é uma data passada
         if checkin_date < datetime.now():
             return jsonify({'error': 'Erro: A data de check-in não pode ser uma data passada!'}), 400
+
+        # Verifique se a reserva tem no mínimo dois dias
+        if (checkout_date - checkin_date).days < 2:
+            return jsonify({'error': 'Erro: Todos os cômodos devem ter no mínimo dois dias de reserva!'}), 400
 
         # Verifica se há um conflito de reservas para o mesmo quarto
         if verificar_conflito(quarto, checkin, checkout):
@@ -176,7 +179,7 @@ def obter_datas_reservadas():
         checkout = datetime.strptime(reserva['checkout'], '%Y-%m-%d')
 
         while checkin <= checkout:
-            datas_reservadas.append(checkin.strftime('%d/%m/%Y'))   # Formato DD/MM/AAAA
+            datas_reservadas.append(checkin.strftime('%d/%m/%Y'))  # Formato DD/MM/AAAA
             checkin += timedelta(days=1)
 
     return datas_reservadas
@@ -220,26 +223,27 @@ def admin():
         if 'ver_todas' in request.form:  # Verifica se o botão de "Ver todas" foi clicado
             reservas = reservas_db.all()  # Retorna todas as reservas do banco de dados
         else:
-            termo_pesquisa = request.form.get('termo').lower()  # Convertendo o termo pesquisado para minúsculas
-            Quarto = Query()
-            # Busca insensível a maiúsculas/minúsculas usando regex
+            termo_pesquisa = request.form.get('pesquisa')
+
+            # Busca por quarto, nome ou email
             reservas = reservas_db.search(
-                (Quarto.quarto.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-                (Quarto.nome.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-                (Quarto.email.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-                (Quarto.checkin.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-                (Quarto.checkout.matches(termo_pesquisa, flags=re.IGNORECASE)) 
+                (Usuario.quarto.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+                (Usuario.nome.matches(termo_pesquisa, flags=re.IGNORECASE)) |
+                (Usuario.email.matches(termo_pesquisa, flags=re.IGNORECASE))
             )
 
-    # Formata as datas antes de passar para o template
+    # Formata as datas antes de passar para o template, se houver reservas
     for reserva in reservas:
-        reserva['checkin'] = datetime.strptime(reserva['checkin'], '%Y-%m-%d').strftime('%d/%m/%Y')
-        reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
-        reserva['data_registro'] = datetime.strptime(reserva['data_registro'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y às %H:%M:%S')
+        try:
+            if 'checkin' in reserva and 'checkout' in reserva:
+                reserva['checkin'] = datetime.strptime(reserva['checkin'], '%Y-%m-%d').strftime('%d/%m/%Y')
+                reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
+                reserva['data_registro'] = datetime.strptime(reserva['data_registro'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y às %H:%M:%S')
+        except (ValueError, KeyError) as e:
+            # Trate o erro de formatação, se necessário
+            print(f"Erro ao formatar a reserva: {reserva}, erro: {e}")
 
     return render_template('admin.html', reservas=reservas)
 
-
-# Inicia o servidor
 if __name__ == '__main__':
     app.run(debug=True)
