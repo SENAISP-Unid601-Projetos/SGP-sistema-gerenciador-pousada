@@ -1,73 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="static/css/login.css" />
     <title>Login e Cadastro Form</title>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <!-- Formulário de Login -->
-          <form action="/login" method="post" class="sign-in-form">
-            <h2 class="title">Login</h2>
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="email" name="email" placeholder="Digite seu email" required />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" name="senha" placeholder="Senha" required />
-            </div>
-            <input type="submit" name="signin" value="Login" class="btn solid" />
-          </form>
+        <div class="forms-container">
+            <div class="signin-signup">
+                <!-- Exibir mensagens de erro ou sucesso para login e cadastro -->
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        <div class="flash-messages">
+                            {% for category, message in messages %}
+                                <p class="{{ category }}">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
 
-          <!-- Formulário de Cadastro -->
-          <form action="/login" method="post" class="sign-up-form">
-            <h2 class="title">Cadastro</h2>
-            <div class="input-field">
-              <i class="fas fa-user"></i>
-              <input type="text" name="nome" placeholder="Digite seu nome" required />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input type="email" name="email" placeholder="Digite seu email" required />
-            </div>
-            <div class="input-field">
-              <i class="fas fa-lock"></i>
-              <input type="password" name="senha" placeholder="Digite sua senha" 
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                title="A senha deve conter pelo menos um caracter maiúsculo, um minúsculo, um número e no mínimo oito caracteres" 
-                required />
-            </div>
-            <input type="submit" name="signup" value="Cadastre-se" class="btn solid" />
-          </form>
-        </div>
-      </div>
+                <!-- Formulário de Login -->
+                <form action="/login" method="post" class="sign-in-form">
+                    <h2 class="title">Login</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="email" name="email" placeholder="Digite seu email" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="senha" placeholder="Senha" required />
+                    </div>
+                    <input type="submit" name="signin" value="Login" class="btn solid" />
+                </form>
 
-      <div class="panels-container">
-        <div class="panel left-panel">
-          <div class="content">
-            <h3>Novo aqui?</h3>
-            <p>Faça seu cadastro e aproveite nossas acomodações</p>
-            <button class="btn transparent" id="sign-up-btn">Cadastro</button>
-          </div>
-          <img src="static/img/login.svg" class="image" alt="Imagem de cadastro" />
+                <!-- Formulário de Cadastro -->
+                <form action="/login" method="post" class="sign-up-form">
+                    <h2 class="title">Cadastro</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="nome" placeholder="Digite seu nome" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Digite seu email" required />
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="senha" placeholder="Digite sua senha" 
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                               title="A senha deve conter pelo menos um caracter maiúsculo, um minúsculo, um número e no mínimo oito caracteres" 
+                               required />
+                    </div>
+                    <input type="submit" name="signup" value="Cadastre-se" class="btn solid" />
+                </form>
+            </div>
         </div>
-        <div class="panel right-panel">
-          <div class="content">
-            <h3>Já tem uma conta?</h3>
-            <p>Faça o login e acesse suas reservas</p>
-            <button class="btn transparent" id="sign-in-btn">Login</button>
-          </div>
-          <img src="static/img/cadastro.svg" class="image" alt="Imagem de login" />
+
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Novo aqui?</h3>
+                    <p>Faça seu cadastro e aproveite nossas acomodações</p>
+                    <button class="btn transparent" id="sign-up-btn">Cadastro</button>
+                </div>
+                <img src="static/img/login.svg" class="image" alt="Imagem de cadastro" />
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Já tem uma conta?</h3>
+                    <p>Faça o login e acesse suas reservas</p>
+                    <button class="btn transparent" id="sign-in-btn">Login</button>
+                </div>
+                <img src="static/img/cadastro.svg" class="image" alt="Imagem de login" />
+            </div>
         </div>
-      </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/login.js') }}"></script>
-  </body>
+</body>
 </html>

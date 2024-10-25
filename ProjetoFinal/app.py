@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session, flash
 from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
@@ -34,6 +34,7 @@ def login():
             # Verifica se o email já está registrado
             usuario_existente = usuarios_db.search(Usuario.email == email)
             if usuario_existente:
+                flash('Erro: Este e-mail já está registrado!', 'error')
                 return redirect(url_for('login'))
 
             # Verifica se é o admin
@@ -41,6 +42,7 @@ def login():
 
             # Adiciona o novo usuário ao banco de dados
             usuarios_db.insert({'nome': nome, 'email': email, 'senha': senha, 'admin': is_admin})
+            flash('Cadastro realizado com sucesso! Faça login para continuar.', 'success')
             return redirect(url_for('login'))
 
         elif 'signin' in request.form:  # Verifica se é um login
@@ -56,8 +58,9 @@ def login():
                 session['nome'] = usuario[0]['nome']
                 session['email'] = usuario[0]['email']
                 session['admin'] = usuario[0].get('admin', False)  # Define a sessão de admin
-                return redirect(url_for('index'))
+                return redirect(url_for('index'))  # Redireciona sem mensagem de sucesso
             else:
+                flash('Erro: E-mail ou senha incorretos!', 'error')
                 return redirect(url_for('login'))
 
     return render_template('login.html')

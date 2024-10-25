@@ -120,7 +120,6 @@ body {
     background-color: #c0392b; /* Escurecer o vermelho ao passar o mouse */
 }
 
-
 /* Media Queries */
 @media (max-width: 768px) {
     .profile-container {

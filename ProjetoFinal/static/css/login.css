@@ -277,6 +277,24 @@ form.sign-in-form {
   pointer-events: all;
 }
 
+.flash-messages p {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.flash-messages .success {
+  background-color: #c6fcd3;
+  color: #155724;
+}
+
+.flash-messages .error {
+  background-color: #ffc5ca;
+  color: #721c24;
+}
+
 @media (max-width: 870px) {
   .container {
     min-height: 800px;
