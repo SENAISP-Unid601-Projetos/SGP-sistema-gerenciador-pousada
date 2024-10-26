@@ -3,19 +3,24 @@ from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from functools import wraps
+import os
 import re
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'  # Chave secreta para gerenciamento de sessões
 
+# Configuração do caminho do banco de dados
+db_path = os.path.join(os.path.dirname(__file__), 'database.json')
+
 # Inicializa o banco de dados TinyDB
-db = TinyDB('database.json')
+try:
+    db = TinyDB(db_path)
+except FileNotFoundError:
+    raise FileNotFoundError("Banco de dados não encontrado! Por favor, certifique-se de que o arquivo 'database.json' existe no diretório.")
+
 usuarios_db = db.table('usuarios')  # Tabela para usuários
 reservas_db = db.table('reservas')  # Tabela para reservas
 Usuario = Query()
-
-# Defina o e-mail do administrador
-ADMIN_EMAIL = 'admin@gmail.com'  # senha: Admin2024
 
 # Página principal
 @app.route('/')
