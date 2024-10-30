@@ -3,6 +3,7 @@ from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from functools import wraps
+import subprocess
 import os
 import re
 
@@ -21,6 +22,8 @@ except FileNotFoundError:
 usuarios_db = db.table('usuarios')  # Tabela para usuários
 reservas_db = db.table('reservas')  # Tabela para reservas
 Usuario = Query()
+
+ADMIN_EMAIL = 'admin@gmail.com'
 
 # Página principal
 @app.route('/')
@@ -265,6 +268,17 @@ def admin():
             print(f"Erro ao formatar a reserva: {reserva}, erro: {e}")
 
     return render_template('admin.html', reservas=reservas)
+
+@app.route('/ia', methods=['POST'])
+def ia():
+    data = request.get_json()  # Recebe a mensagem do usuário
+    user_message = data.get("text")
+
+    # Aqui você pode processar a mensagem do usuário e gerar uma resposta
+    response_message = f"Você disse: {user_message}"  # Exemplo de resposta
+
+    return jsonify({"response": response_message})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
