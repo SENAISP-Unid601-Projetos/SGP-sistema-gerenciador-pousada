@@ -3,6 +3,7 @@ from tinydb import TinyDB, Query
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, timedelta
 from functools import wraps
+from difflib import get_close_matches
 import subprocess
 import os
 import re
@@ -238,25 +239,34 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+from tinydb import where
+
 @app.route('/admin', methods=['GET', 'POST'])
-@login_required  # Aplica o decorator
+@login_required
 @admin_required
 def admin():
     reservas = []
     if request.method == 'POST':
-        if 'ver_todas' in request.form:  # Verifica se o botão de "Ver todas" foi clicado
-            reservas = reservas_db.all()  # Retorna todas as reservas do banco de dados
-        else:
-            termo_pesquisa = request.form.get('pesquisa')
+        termo_pesquisa = request.form.get('termo')
+        
+        if 'ver_todas' in request.form:
+            reservas = reservas_db.all()
+        elif termo_pesquisa:  # Realiza a pesquisa apenas se houver termo
+            termo_pesquisa_lower = termo_pesquisa.lower()
+            reservas_encontradas = reservas_db.all()
 
-            # Busca por quarto, nome ou email
-            reservas = reservas_db.search(
-                (Usuario.quarto.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-                (Usuario.nome.matches(termo_pesquisa, flags=re.IGNORECASE)) |
-                (Usuario.email.matches(termo_pesquisa, flags=re.IGNORECASE))
-            )
+            # Procura reservas onde o termo está parcialmente no nome, email ou quarto
+            reservas = [
+                reserva for reserva in reservas_encontradas
+                if termo_pesquisa_lower in reserva['nome'].lower() or
+                   termo_pesquisa_lower in reserva['email'].lower() or
+                   termo_pesquisa_lower in reserva['quarto'].lower() or
+                   termo_pesquisa_lower in reserva['checkin'].lower() or
+                   termo_pesquisa_lower in reserva['checkout'].lower() or
+                   any(get_close_matches(termo_pesquisa_lower, [reserva['nome'].lower(), reserva['email'].lower(), reserva['quarto'].lower()], n=1, cutoff=0.7))
+            ]
 
-    # Formata as datas antes de passar para o template, se houver reservas
+    # Formatação das datas
     for reserva in reservas:
         try:
             if 'checkin' in reserva and 'checkout' in reserva:
@@ -264,7 +274,6 @@ def admin():
                 reserva['checkout'] = datetime.strptime(reserva['checkout'], '%Y-%m-%d').strftime('%d/%m/%Y')
                 reserva['data_registro'] = datetime.strptime(reserva['data_registro'], '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y às %H:%M:%S')
         except (ValueError, KeyError) as e:
-            # Trate o erro de formatação, se necessário
             print(f"Erro ao formatar a reserva: {reserva}, erro: {e}")
 
     return render_template('admin.html', reservas=reservas)
