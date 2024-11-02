@@ -1,0 +1,27 @@
+Guia de Uso da API Ollama
+Este guia descreve as etapas para configurar e iniciar a API desenvolvida com integração ao Ollama. Siga cada passo para garantir que o ambiente esteja configurado corretamente e que o Ollama seja executado conforme esperado.
+
+Passo a Passo:
+1- Certifique-se de que o Ollama esteja instalado
+Antes de iniciar, confirme que o Ollama está instalado no computador. A presença do Ollama é essencial para o funcionamento adequado da API.
+
+2- Acesse a pasta do projeto no terminal
+Abra o CMD (Prompt de Comando) e navegue até a pasta ollama-api, que contém os arquivos do projeto. Use o comando cd para se mover até o diretório correto.
+
+3- Baixe a versão do modelo Llama
+Com o CMD ainda na pasta ollama-api, execute o comando:
+	->ollama pull llama3.2
+
+Esse comando faz o download da versão 3.2 do modelo Llama, essencial para o processamento de linguagem pela API.
+
+4- Abra o terminal no VS Code
+Inicie o VS Code e, dentro do editor, abra um terminal que aponte para a pasta ollama-api.
+
+5-Inicie o servidor da API
+No terminal do VS Code, execute o comando:
+	->node index.js
+
+Esse comando inicia o servidor da API, preparando-a para atender às requisições.
+
+API pronta para uso
+A partir desse momento, o Ollama estará rodando, e a API estará pronta para receber e processar as requisições conforme a integração configurada.
