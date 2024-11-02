@@ -228,7 +228,7 @@
         </div>
         <div id="chatbotInputContainer">
             <input type="text" id="chatbotInput" placeholder="Digite sua mensagem...">
-            <button id="sendButton">Enviar</button>
+            <button onclick="enviarMensagem()" id="sendButton">Enviar</button>
         </div>
     </div>
 
@@ -248,24 +248,37 @@
             }
         });
 
-        function sendMessage() {
-            var inputField = document.getElementById("chatbotInput");
-            var userMessage = inputField.value.trim();
-            if (userMessage !== "") {
-                var userMessageElement = document.createElement("div");
-                userMessageElement.className = "message user-message";
-                userMessageElement.textContent = userMessage;
-                document.getElementById("chatbotContent").appendChild(userMessageElement);
+        let messageCount = 0; // Variável para contar as mensagens e gerar IDs únicos
 
-                var botResponseElement = document.createElement("div");
-                botResponseElement.className = "message bot-message";
-                botResponseElement.textContent = "Esta é uma resposta automática do chatbot.";
-                document.getElementById("chatbotContent").appendChild(botResponseElement);
+    function sendMessage() {
+    var inputField = document.getElementById("chatbotInput");
+    var userMessage = inputField.value.trim();
+    
+    if (userMessage !== "") {
+        // Criar a div da mensagem do usuário com um id único
+        var userMessageElement = document.createElement("div");
+        userMessageElement.className = "message user-message";
+        userMessageElement.id = `userMessage-${messageCount}`;
+        userMessageElement.textContent = userMessage;
+        document.getElementById("chatbotContent").appendChild(userMessageElement);
 
-                inputField.value = "";
-                document.getElementById("chatbotContent").scrollTop = document.getElementById("chatbotContent").scrollHeight;
-            }
-        }
+        // Criar a div da resposta do bot com um id único
+        var botResponseElement = document.createElement("div");
+        botResponseElement.className = "message bot-message";
+        botResponseElement.id = `botResponse-${messageCount}`;
+      
+        document.getElementById("chatbotContent").appendChild(botResponseElement);
+
+        // Limpar o campo de entrada e rolar para o final
+        inputField.value = "";
+        document.getElementById("chatbotContent").scrollTop = document.getElementById("chatbotContent").scrollHeight;
+
+        // Incrementar o contador para o próximo par de mensagens
+        messageCount++;
+    }
+}
+
+
 
         document.getElementById("sendButton").addEventListener("click", sendMessage);
 
