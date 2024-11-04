@@ -8,23 +8,31 @@
 
 /* Estilo do corpo */
 body {
-    background-color: #f5f5f5; /* Fundo claro */
-    color: #4d3b2a; /* Texto marrom escuro */
+    background-color: #aca775;
+    color: #4d3b2a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center; /* Centraliza todo o conteúdo */
 }
 
 /* Navbar */
 .navbar {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #6d4f3e; /* Marrom escuro */
+    background-color: #23412c;
     padding: 15px 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .logo {
-    font-size: 1.8rem;
-    color: #a8d5ba; /* Verde claro */
+    font-size: 2.2rem;
+    color: #e9e9e9; /* Cor do título */
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none; /* Remove o sublinhado */
 }
 
 .navbar .menu {
@@ -34,99 +42,111 @@ body {
 }
 
 .navbar .menu a {
-    color: #e9ecef; /* Texto claro */
+    color: #e9ecef;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s;
 }
 
 .navbar .menu a:hover {
-    color: #8db596; /* Verde suave ao passar o mouse */
+    color: #8db596;
 }
 
 /* Estilo do contêiner do perfil */
 .profile-container {
+    max-width: 800px;
+    width: 100%;
     padding: 40px 10%;
     text-align: center;
+    flex: 1;
+    margin-top: 20px;
+    background-color: #ffffff; /* Altere esta cor */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Título do perfil */
 .profile-container h1 {
-    font-size: 36px;
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    color: #4d3b2a; /* Marrom escuro */
+    color: #4d3b2a;
 }
 
 /* Estilo das informações do perfil */
 .profile-info {
     margin-bottom: 40px;
-    font-size: 18px;
+    font-size: 1.2rem;
+    color: #5c4f41;
 }
 
 /* Seção das reservas */
 .reservas-container {
+    max-width: 800px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
     justify-content: center;
+    margin-top: 20px;
 }
 
 /* Cartão de reserva */
 .reserva-card {
-    background-color: #d4c2a2; /* Fundo dos cartões */
+    background-color: #d4c2a2;
     border-radius: 10px;
-    margin: 15px;
     padding: 20px;
-    width: 300px; /* Largura fixa para os cartões */
+    width: 280px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s;
 }
 
 .reserva-card:hover {
-    transform: scale(1.05); /* Efeito de hover */
+    transform: translateY(-5px);
 }
 
-/* Título e texto dentro do cartão */
 .reserva-card h3 {
-    color: #5c4f41; /* Marrom médio para o título */
+    color: #5c4f41;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .reserva-card p {
-    margin: 5px 0;
-    color: #4d3b2a; /* Marrom escuro para o texto */
+    color: #4d3b2a;
+    text-align: center;
 }
 
 /* Rodapé */
 .footer {
-    background-color: #4d3b2a; /* Marrom escuro */
-    color: #fff; /* Texto branco */
+    background-color: #23412c;
+    color: #fff;
     text-align: center;
-    padding: 20px 0;
+    padding: 20px;
+    width: 100%;
 }
 
-/* Estilo do botão Excluir */
+/* Botão Excluir */
 .btn-excluir {
-    background-color: #e74c3c; /* Cor vermelho para excluir */
-    color: #fff; /* Texto branco */
+    background-color: #e74c3c;
+    color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     transition: background-color 0.3s;
 }
 
 .btn-excluir:hover {
-    background-color: #c0392b; /* Escurecer o vermelho ao passar o mouse */
+    background-color: #c0392b;
 }
 
 /* Media Queries */
 @media (max-width: 768px) {
-    .profile-container {
+    .profile-container, .reservas-container {
         padding: 20px 5%;
     }
-
     .reserva-card {
-        width: 90%; /* Largura responsiva para os cartões */
+        width: 90%;
     }
 }
