@@ -227,7 +227,7 @@
             <div class="message bot-message">Olá! Como posso ajudar você hoje?</div>
         </div>
         <div id="chatbotInputContainer">
-            <input type="text" id="chatbotInput" placeholder="Digite sua mensagem...">
+            <input type="text" id="chatbotInput" placeholder="Digite sua mensagem..." onkeydown="if(event.key === 'Enter') enviarMensagem()">
             <button onclick="enviarMensagem()" id="sendButton">Enviar</button>
         </div>
     </div>

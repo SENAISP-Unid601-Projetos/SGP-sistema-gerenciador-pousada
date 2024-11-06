@@ -15,14 +15,14 @@ async function enviarMensagem() {
   const userMessageElement = document.createElement("div");
   userMessageElement.classList.add("message", "user-message");
   userMessageElement.textContent = inputMensagem;
-  respostaContainer.appendChild(userMessageElement);
+ 
 
   // Cria e exibe um elemento de resposta do bot com um id único
   const botResponseElement = document.createElement("div");
   botResponseElement.classList.add("message", "bot-message");
   botResponseElement.id = `botResponse-${messageCount}`; // Adiciona um id com o número atual
   botResponseElement.textContent = "Carregando resposta...";
-  respostaContainer.appendChild(botResponseElement);
+  
 
   // Incrementa o contador para o próximo par de mensagens
   messageCount++;
