@@ -29,7 +29,7 @@ async function enviarMensagem() {
 
   // Define o contexto e concatena a mensagem do usuário
   const contexto =
-    "Nesta conversa, você terá que me responder dúvidas sobre uma pousada. Saiba que essa pousada tem 4 quartos livres e 2 ocupados, os quartos que estão livres estão na faixa de preço de 500 reais a diária.";
+    "Nesta conversa, você terá que me responder dúvidas sobre a pousada Quinta Do Ypuã. A seguir, te darei as informações gerais da pousada e você terá que responder duvidas sobre a pousada com base nas informações que te passei. A pousada Quinta do Ypuã é um ambiente com muita natureza e ótimo atendimento, para alugar os quartos, é necessário se fazer uma reserva de no minimo 2 dias, tendo como opções os quartos: Domo - A novidade da pousada, com design geodésico sustentável. Ideal para quem busca uma estadia inovadora e diferenciada. R$ 590,00/noite. Chalé Família - Com dois quartos climatizados, cozinha equipada, churrasqueira e sacada com vista para o mar. R$ 590,00/noite. Charrua - Ônibus remodelado em quarto aconchegante, combinando o charme da estrada com conforto. R$ 490,00/noite. Cabana - Em área reservada, oferece camas confortáveis, cozinha, varanda e deck com churrasqueira e vista para o mar. R$ 490,00/noite. Suíte com Cozinha - Suíte com vista para o mar, cozinha equipada, deck com churrasqueira. R$ 390,00/noite. Estacionamento para Overlanders - Espaço para veículos, com pontos de água, luz, banheiro e churrasqueira. R$ 100,00/noite.  Todos os quartos tem wifi, tv a cabo, ar-condicionado e cozinha, com exceção do estacionamento, que apenas possui wifi e ducha";
   const mensagemCompleta = contexto + inputMensagem;
   console.log(JSON.stringify({ text: mensagemCompleta }));
   console.log("ENVIOU");
