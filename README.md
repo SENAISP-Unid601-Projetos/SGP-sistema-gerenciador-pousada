@@ -22,6 +22,7 @@ O objetivo do SGP é centralizar e automatizar os processos da pousada, garantin
 - **Administração de Acomodações**: Visualização da disponibilidade e ocupação dos quartos em tempo real.
 - **Gestão de Funcionários**: Cadastro e gerenciamento de usuários do sistema.
 - **Interface Simples e Intuitiva**: Desenvolvida para ser acessível à equipe da pousada.
+- **Assistente Baseado em IA**: Utilização do **Ollama** para gerar insights, automatizar tarefas e responder a perguntas frequentes dos usuários.
 
 ---
 
@@ -31,6 +32,7 @@ O objetivo do SGP é centralizar e automatizar os processos da pousada, garantin
 - **Flask**: Framework utilizado para o desenvolvimento web.
 - **HTML, CSS e JavaScript**: Criação de um frontend responsivo e funcional.
 - **TinyDB**: Banco de dados leve para armazenamento das informações.
+- **Ollama**: Integração de IA para otimização de processos e suporte inteligente.
 
 ---
 
@@ -38,6 +40,7 @@ O objetivo do SGP é centralizar e automatizar os processos da pousada, garantin
 
 - **Redução de erros manuais** e do tempo gasto com processos administrativos;
 - **Maior controle e organização** das reservas, hóspedes e acomodações;
+- **Assistência inteligente** com uso de IA para gerar respostas rápidas e insights automáticos;
 - **Interface amigável**, facilitando a adoção pela equipe.
 
 ---
